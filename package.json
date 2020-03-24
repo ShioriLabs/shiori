@@ -1,0 +1,42 @@
+{
+  "name": "shiori",
+  "version": "0.0.1",
+  "description": "Yet another Discord bot",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development nodemon -e ts --watch ./src --exec \"babel-node src/app.ts --extensions=\".ts\"\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevemc4/shiori.git"
+  },
+  "author": "Dhika Rizky <deka_r@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevemc4/shiori/issues"
+  },
+  "homepage": "https://github.com/stevemc4/shiori#readme",
+  "dependencies": {
+    "discord.js": "^12.0.2",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/node": "^13.9.3",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^2.0.2",
+    "typescript": "^3.8.3"
+  }
+}
