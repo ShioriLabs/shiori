@@ -7,7 +7,7 @@ import Modules from './module'
 function MessageHandler (message: Message): void {
   if (!message.author.bot) {
     try {
-      const parsedCommand = parseCommand('!', message.content)
+      const parsedCommand = parseCommand('=', message.content)
       const commandExists = Modules.some(item => {
         if (parsedCommand.command === item.command) {
           item.callback(message, parsedCommand.args)
