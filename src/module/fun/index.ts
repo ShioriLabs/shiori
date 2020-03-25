@@ -22,7 +22,18 @@ const Greet = new Resolver('greet', (message: Message) => {
   }
 }, 'Greet someone (or anyone)')
 
+const Confess = new Resolver('confess', (message: Message) => {
+  const user = message.mentions.users.first()
+
+  if (user) {
+    message.channel.send(`Hi <@!${user.id}>, do you want to be my boyfriend?`)
+  } else {
+    message.channel.send('Please @mention someone to confess')
+  }
+}, 'Confess to someone')
+
 export default [
   // WuohMantab,
-  Greet
+  Greet,
+  Confess
 ]
