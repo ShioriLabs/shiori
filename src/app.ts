@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import Discord from 'discord.js'
 
-import MessageHandler from './MessageHandler'
+import messageHandler from './messageHandler'
 
 dotenv.config()
 
@@ -11,6 +11,6 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`)
 })
 
-client.on('message', MessageHandler)
+client.on('message', messageHandler)
 
 client.login(process.env.DISCORD_TOKEN)
