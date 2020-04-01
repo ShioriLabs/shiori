@@ -3,7 +3,7 @@ import ytdl from 'ytdl-core'
 import YouTube from 'yt-search'
 
 import Resolver from '../../class/Resolver'
-import audioSearchContext, { addContext, removeContext } from '../../util/audioSearchContext'
+import { addContext, removeContext, getContext } from '../../util/audioSearchContext'
 import UserAudioContext from '../../class/UserAudioContext'
 
 let dispatchers: Array<{server: Guild; dispatcher: StreamDispatcher}> = []
@@ -28,7 +28,7 @@ const Play = new Resolver('play', async (message: Message, args: string[]) => {
     })) {
       if (!isNaN(Number.parseInt(joinedArgs))) {
         const selected = Number.parseInt(joinedArgs)
-        const context = audioSearchContext.find(item => item.user.id === message.member.id)
+        const context = getContext(message.member)
         if (context) {
           const selectedSong = context.context[selected - 1]
           const dispatcher = message.guild.me.voice.connection.play(ytdl(selectedSong.url, {
