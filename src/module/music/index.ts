@@ -44,6 +44,7 @@ const Play = new Resolver('play', async (message: Message, args: string[]) => {
             .setTitle('Now Playing')
             .setDescription(`${selectedSong.title} by ${selectedSong.channel}`)
           message.channel.send(nowPlayingEmbed)
+          await context.audioMessage.delete()
           removeContext(context.user)
         }
       }
@@ -76,8 +77,8 @@ const Search = new Resolver('search', async (message: Message, args: string[]) =
       }
     }))
     .addField('\u200B', 'Type `=play <number>` to add song into the queue')
-  addContext(message.member, result)
-  message.channel.send(resultEmbed)
+  const audioMessage = await message.channel.send(resultEmbed)
+  addContext(message.member, audioMessage, result)
 })
 
 const Stop = new Resolver('stop', async (message: Message) => {

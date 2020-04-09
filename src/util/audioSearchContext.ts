@@ -1,15 +1,16 @@
-import { GuildMember } from 'discord.js'
+import { GuildMember, Message } from 'discord.js'
 import UserAudioContext from '../class/UserAudioContext'
 
-let userContext: Array<{user: GuildMember; context: UserAudioContext[]}> = []
+let userContext: Array<{user: GuildMember; audioMessage: Message; context: UserAudioContext[]}> = []
 
-function addContext (user: GuildMember, context: UserAudioContext[]): void {
+function addContext (user: GuildMember, audioMessage: Message, context: UserAudioContext[]): void {
   const existingContext = userContext.find(item => item.user.id === user.id)
   if (existingContext) {
     existingContext.context = context
   } else {
     userContext.push({
       user,
+      audioMessage,
       context
     })
   }
@@ -19,7 +20,7 @@ function removeContext (user: GuildMember): void {
   userContext = userContext.filter(item => item.user.id !== user.id)
 }
 
-function getContext (user: GuildMember): {user: GuildMember; context: UserAudioContext[]} {
+function getContext (user: GuildMember): {user: GuildMember; audioMessage: Message; context: UserAudioContext[]} {
   return userContext.find(item => item.user.id === user.id)
 }
 
