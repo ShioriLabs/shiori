@@ -22,15 +22,24 @@ const Greet = new Resolver('greet', (message: Message) => {
   }
 }, 'Greet someone (or anyone)')
 
-const Confess = new Resolver('confess', (message: Message) => {
+const Confess = new Resolver('confess', (message: Message, args: string[]) => {
   const user = message.mentions.users.first()
 
+  const possibleString = [
+    'do you want to be my lover?',
+    'would you go out with me?',
+    'can we go on a date together?'
+  ]
+
+  const confession = possibleString[Math.floor(Math.random() * possibleString.length)]
+  let who = args.join(' ')
+
   if (user) {
-    message.channel.send(`Hi <@!${user.id}>, do you want to be my boyfriend?`)
-  } else {
-    message.channel.send('Please @mention someone to confess')
+    who = `<@!${user.id}>`
   }
-}, 'Confess to someone')
+
+  message.channel.send(`Hi ${who}, ${confession}`)
+}, 'Confess to someone!')
 
 export default [
   // WuohMantab,
