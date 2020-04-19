@@ -41,8 +41,14 @@ const Confess = new Resolver('confess', (message: Message, args: string[]) => {
   message.channel.send(`Hi ${who}, ${confession}`)
 }, 'Confess to someone!')
 
+const Coin = new Resolver('coin', (message: Message) => {
+  const random = Math.random()
+  message.channel.send(random > 0.5 ? 'Head' : 'Tails')
+}, 'Flip a coin')
+
 export default [
   // WuohMantab,
   Greet,
-  Confess
+  Confess,
+  Coin
 ]
