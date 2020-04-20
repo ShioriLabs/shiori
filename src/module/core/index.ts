@@ -24,7 +24,17 @@ const Help = new Resolver('help', (message: Message) => {
   message.channel.send(HelpEmbed)
 }, 'Show this help message')
 
+const Echo = new Resolver('echo', (message: Message, args: string[]) => {
+  if (args.length > 0) {
+    const text = args.join(' ')
+    message.channel.send(text)
+  } else {
+    message.channel.send('Please type something to echo')
+  }
+}, 'Echo back a text')
+
 export default [
   Ping,
-  Help
+  Help,
+  Echo
 ]
