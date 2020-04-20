@@ -5,10 +5,10 @@ import Resolver from '../../class/Resolver'
 import WikipediaAPIResponse from '../../class/WikipediaAPIResponse'
 
 const Define = new Resolver('define', async (message: Message, args: string[]) => {
-  const sentMessage = await message.channel.send('Let me search Wikipedia for that...')
   if (args.length === 0) {
     message.channel.send('You need to insert something to search!')
   } else {
+    const sentMessage = await message.channel.send('Let me search Wikipedia for that...')
     const query = encodeURI(args.join(' '))
     const { data: searchResult } = await axios.get(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${query}&utf8=&format=json`)
     if (searchResult.query.search.length === 0) {
