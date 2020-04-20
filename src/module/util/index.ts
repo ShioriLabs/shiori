@@ -12,7 +12,7 @@ const Define = new Resolver('define', async (message: Message, args: string[]) =
     const query = encodeURI(args.join(' '))
     const { data: searchResult } = await axios.get(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${query}&utf8=&format=json`)
     if (searchResult.query.search.length === 0) {
-      await sentMessage.edit(`Can't find \`${query}\` in Wikipedia. Please try again`)
+      await sentMessage.edit(`Can't find \`${args.join(' ')}\` in Wikipedia. Please try again`)
       return
     }
     const { data } = await axios.get(`https://en.wikipedia.org/w/api.php?&action=query&prop=extracts|info&titles=${encodeURI(searchResult.query.search[0].title)}&format=json&inprop=url&explaintext=true&exlimit=1&exintro=true`)
