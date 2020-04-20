@@ -47,6 +47,11 @@ const Coin = new Resolver('coin', (message: Message) => {
   message.channel.send(random > 0.5 ? 'Head' : 'Tails')
 }, 'Flip a coin')
 
+const Dice = new Resolver('dice', (message: Message) => {
+  const result = Math.ceil(Math.random() * 6)
+  message.channel.send(result)
+}, 'Roll a dice')
+
 const Encourage = new Resolver('encourage', (message: Message) => {
   const user = message.mentions.users.first()
 
@@ -73,5 +78,6 @@ export default [
   Greet,
   Confess,
   Coin,
+  Dice,
   Encourage
 ]
