@@ -6,16 +6,7 @@ let Context: ServerContext[]
 const addContext = (server: Guild): void => {
   const checkExistingContext = Context.find(item => item.server.id === server.id)
   if (!checkExistingContext) {
-    const newContext: ServerContext = {
-      server,
-      context: {
-        audio: {
-          queue: [],
-          searchResult: []
-        }
-      }
-    }
-
+    const newContext: ServerContext = new ServerContext(server)
     Context.push(newContext)
   }
 }
