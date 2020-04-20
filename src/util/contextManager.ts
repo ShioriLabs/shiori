@@ -21,7 +21,11 @@ const addContext = (server: Guild): void => {
 }
 
 const getContext = (server: Guild): ServerContext => {
-  const result = Context.find(item => item.server.id === server.id)
+  let result = Context.find(item => item.server.id === server.id)
+  if (!result) {
+    addContext(server)
+    result = Context.find(item => item.server.id === server.id)
+  }
   return result
 }
 
