@@ -15,7 +15,7 @@ function MessageHandler (message: Message): void {
         }
       })
       if (!commandExists) {
-        message.channel.send('Invalid command, please type `!help` to see available commands!')
+        message.channel.send('Invalid command. please type `=help` to see available commands!')
       }
     } catch (e) {
 
