@@ -8,6 +8,12 @@ dotenv.config()
 const client = new Discord.Client()
 
 client.on('ready', () => {
+  client.user.setPresence({
+    activity: {
+      name: 'your heart',
+      type: 'LISTENING'
+    }
+  })
   console.log(`Logged in as ${client.user.tag}`)
 })
 
