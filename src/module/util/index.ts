@@ -28,6 +28,30 @@ const Define = new Resolver('define', async (message: Message, args: string[]) =
   }
 }, 'Get a definition of something from Wikipedia')
 
+const Urban = new Resolver('urban', async (message: Message, args: string[]) => {
+  if (args.length === 0) {
+    message.channel.send('You need to insert something to search!')
+  } else {
+    const sentMessage = await message.channel.send('Let me search Urban Dictionary for that...')
+    const query = encodeURI(args.join(''))
+    const { data } = await axios.get(`http://api.urbandictionary.com/v0/define?term=${query}`)
+    if (data.list.length === 0) {
+      await sentMessage.edit(`Can't find ${args.join(' ')} on Urban Dictionary`)
+      return
+    }
+    const result = data.list[0]
+    const resultMessage = new MessageEmbed()
+      .setColor('#ffaaa5')
+      .setTitle(result.word)
+      .setURL(result.permalink)
+      .setDescription(result.definition)
+      .setFooter('Content from Urban Dictionary')
+    await sentMessage.edit('Here\'s what I found on Urban Dictionary:')
+    await sentMessage.edit(resultMessage)
+  }
+})
+
 export default [
-  Define
+  Define,
+  Urban
 ]
