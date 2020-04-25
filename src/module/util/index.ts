@@ -46,6 +46,13 @@ const Urban = new Resolver('urban', async (message: Message, args: string[]) => 
       .setURL(result.permalink)
       .setDescription(result.definition)
       .setFooter('Content from Urban Dictionary')
+      .addFields([
+        {
+          name: 'Examples',
+          value: result.example,
+          inline: false
+        }
+      ])
     await sentMessage.edit('Here\'s what I found on Urban Dictionary:')
     await sentMessage.edit(resultMessage)
   }
