@@ -56,7 +56,7 @@ const Urban = new Resolver('urban', async (message: Message, args: string[]) => 
     await sentMessage.edit('Here\'s what I found on Urban Dictionary:')
     await sentMessage.edit(resultMessage)
   }
-})
+}, 'Get a definition of something from Urban Dictionary')
 
 export default [
   Define,
