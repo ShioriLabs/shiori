@@ -73,11 +73,30 @@ const Encourage = new Resolver('encourage', (message: Message) => {
   }
 }, 'Encourage someone to do their best!')
 
+const Compliment = new Resolver('compliment', (message: Message) => {
+  const user = message.mentions.users.first()
+
+  const possibleString = [
+    'good job!',
+    'keep it up!',
+    'nice! keep it up!'
+  ]
+
+  const compliment = possibleString[Math.floor(Math.random() * possibleString.length)]
+
+  if (user) {
+    message.channel.send(`<@!${user.id}>, ${compliment}`)
+  } else {
+    message.channel.send('Please mention someone you want to encourage!')
+  }
+}, 'Compliment someone for their hard work!')
+
 export default [
   // WuohMantab,
   Greet,
   Confess,
   Coin,
   Dice,
-  Encourage
+  Encourage,
+  Compliment
 ]
