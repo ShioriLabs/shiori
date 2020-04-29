@@ -81,7 +81,7 @@ const Anime = new Resolver('anime', async (message: Message, args: string[]) => 
 
   await sentMessage.edit('Here\'s what I found on AniList:')
   await sentMessage.edit(embedMessage)
-}, 'Get an anime staff\'s detail')
+}, 'Get the detail of an anime')
 
 export default [
   Staff,
