@@ -52,7 +52,7 @@ const Dice = new Resolver('dice', (message: Message) => {
   message.channel.send(result)
 }, 'Roll a dice')
 
-const Encourage = new Resolver('encourage', (message: Message) => {
+const Encourage = new Resolver('encourage', (message: Message, args: string[]) => {
   const user = message.mentions.users.first()
 
   const possibleString = [
@@ -68,6 +68,8 @@ const Encourage = new Resolver('encourage', (message: Message) => {
 
   if (user) {
     message.channel.send(`<@!${user.id}>, ${encouragement}`)
+  } else if (args.length === 1 && args[0].toLowerCase() === 'me') {
+    message.channel.send(`<@!${message.author.id}>, ${encouragement}`)
   } else {
     message.channel.send('Please mention someone you want to encourage!')
   }
