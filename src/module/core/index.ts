@@ -18,7 +18,7 @@ const Help = new Resolver('help', (message: Message, args: string[]) => {
         ...commandList.map(item => {
           return {
             name: `\`${item.id}\``,
-            value: `[${item.module}] ${item.description}`
+            value: `**${item.module}**: ${item.description}`
           }
         })
       ])
