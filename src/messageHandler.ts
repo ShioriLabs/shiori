@@ -8,7 +8,13 @@ function MessageHandler (message: Message): void {
   if (!message.author.bot) {
     try {
       const parsedCommand = parseCommand('=', message.content)
-      const commandExists = Modules.some(item => {
+      const commands = Modules.reduce((prev, item) => {
+        return [
+          ...prev,
+          ...item.commands
+        ]
+      }, [])
+      const commandExists = commands.some(item => {
         if (parsedCommand.command === item.command) {
           item.callback(message, parsedCommand.args)
           return true

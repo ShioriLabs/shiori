@@ -5,9 +5,9 @@ import Util from './util'
 import ACG from './acg'
 
 export default [
-  ...Core,
-  ...Fun,
-  ...Music,
-  ...Util,
-  ...ACG
+  Core,
+  Fun,
+  Music,
+  Util,
+  ACG
 ]

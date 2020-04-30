@@ -89,10 +89,15 @@ const Stop = new Resolver('stop', async (message: Message) => {
   })
 })
 
-export default [
-  Join,
-  Leave,
-  Play,
-  Stop,
-  Search
-]
+export default {
+  id: 'music',
+  name: 'Music',
+  description: 'Play them tunes',
+  commands: [
+    Join,
+    Leave,
+    Play,
+    Stop,
+    Search
+  ]
+}

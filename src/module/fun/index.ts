@@ -91,12 +91,17 @@ const Compliment = new Resolver('compliment', (message: Message) => {
   }
 }, 'Compliment someone for their hard work!')
 
-export default [
-  // WuohMantab,
-  Greet,
-  Confess,
-  Coin,
-  Dice,
-  Encourage,
-  Compliment
-]
+export default {
+  id: 'fun',
+  name: 'Fun',
+  description: 'Fun & Wholesome commands to spice things up!',
+  commands: [
+    // WuohMantab,
+    Greet,
+    Confess,
+    Coin,
+    Dice,
+    Encourage,
+    Compliment
+  ]
+}

@@ -83,7 +83,12 @@ const Anime = new Resolver('anime', async (message: Message, args: string[]) => 
   await sentMessage.edit(embedMessage)
 }, 'Get the detail of an anime')
 
-export default [
-  Staff,
-  Anime
-]
+export default {
+  id: 'acg',
+  name: 'ACG',
+  description: 'Commands related to the ACG culture',
+  commands: [
+    Staff,
+    Anime
+  ]
+}

@@ -58,7 +58,12 @@ const Urban = new Resolver('urban', async (message: Message, args: string[]) => 
   }
 }, 'Get a definition of something from Urban Dictionary')
 
-export default [
-  Define,
-  Urban
-]
+export default {
+  id: 'util',
+  name: 'Utilities',
+  description: 'Useful commands for getting real world info',
+  commands: [
+    Define,
+    Urban
+  ]
+}

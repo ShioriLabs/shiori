@@ -1,27 +1,49 @@
 import { Message, MessageEmbed } from 'discord.js'
 
 import Resolver from '../../class/Resolver'
-import compileHelpFile from '../../util/compileHelpFile'
+import { compileHelpFile, compileHelpPage } from '../../util/compileHelpFile'
 
 const Ping = new Resolver('ping', (message: Message) => {
   message.reply('Pong!')
 }, 'Ping the bot')
 
-const Help = new Resolver('help', (message: Message) => {
-  const commandList = compileHelpFile()
-  const HelpEmbed = new MessageEmbed()
-    .setColor('#ffaaa5')
-    .setTitle('HELP')
-    .addFields([
-      ...commandList.map(item => {
-        return {
-          name: `\`${item.command}\``,
-          value: item.usage
-        }
-      })
-    ])
-
-  message.channel.send(HelpEmbed)
+const Help = new Resolver('help', (message: Message, args: string[]) => {
+  if (args.length === 0) {
+    const commandList = compileHelpPage()
+    const HelpEmbed = new MessageEmbed()
+      .setColor('#ffaaa5')
+      .setTitle('Help Page')
+      .setDescription('Get help on the modules by typing `=help <module>`. Below is the available modules')
+      .addFields([
+        ...commandList.map(item => {
+          return {
+            name: `\`${item.id}\``,
+            value: `[${item.module}] ${item.description}`
+          }
+        })
+      ])
+    message.channel.send(HelpEmbed)
+  } else {
+    const moduleName = args.join(' ')
+    try {
+      const commandList = compileHelpFile(moduleName)
+      const HelpEmbed = new MessageEmbed()
+        .setColor('#ffaaa5')
+        .setTitle(`Help Page: ${commandList.name}`)
+        .setDescription(`${commandList.description}`)
+        .addFields([
+          ...commandList.help.map(item => {
+            return {
+              name: `\`${item.command}\``,
+              value: item.usage
+            }
+          })
+        ])
+      message.channel.send(HelpEmbed)
+    } catch {
+      message.channel.send('Can\'t get help for that module. Please try again')
+    }
+  }
 }, 'Show this help message')
 
 const Echo = new Resolver('echo', (message: Message, args: string[]) => {
@@ -33,8 +55,13 @@ const Echo = new Resolver('echo', (message: Message, args: string[]) => {
   }
 }, 'Echo back a text')
 
-export default [
-  Ping,
-  Help,
-  Echo
-]
+export default {
+  id: 'core',
+  name: 'Core',
+  description: 'Core Shiori Commands',
+  commands: [
+    Ping,
+    Help,
+    Echo
+  ]
+}
