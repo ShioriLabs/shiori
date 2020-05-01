@@ -47,9 +47,6 @@ const Anime = new Resolver('anime', async (message: Message, args: string[]) => 
     return
   }
 
-  // const descriptionSections = result.description ? result.description.split('\n\n') : ['No description available.']
-  // const slicedDescription = descriptionSections.slice(0, 3).join('\n\n')
-  // const reformattedDescription = slicedDescription.replace(/__/g, '**')
   const embedMessage = new MessageEmbed()
     .setColor('#ffaaa5')
     .setTitle(`${result.title.english ? result.title.english : result.title.romaji}`)
@@ -74,6 +71,14 @@ const Anime = new Resolver('anime', async (message: Message, args: string[]) => 
         name: 'Genres',
         value: result.genres.join(', '),
         inline: true
+      },
+      {
+        name: 'Casts',
+        value: result.characters.edges.map(item => {
+          const actor = `[${item.voiceActors[0].name.full}](${item.voiceActors[0].siteUrl})`
+          const character = `[${item.node.name.full}](${item.node.siteUrl})`
+          return `**${actor}**\nas ${character}`
+        }).join('\n\n')
       }
     ])
     .setThumbnail(result.coverImage.medium)

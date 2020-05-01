@@ -14,6 +14,22 @@ interface Anime {
   };
   genres: string[];
   siteUrl: string;
+  characters: {
+    edges: {
+      node: {
+        name: {
+          full: string;
+        };
+        siteUrl: string;
+      };
+    voiceActors: {
+      name: {
+        full: string;
+      };
+      siteUrl: string;
+    }[];
+    }[];
+  };
 }
 
 export default Anime

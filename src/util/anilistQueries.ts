@@ -58,6 +58,22 @@ const ANIME_QUERY = `
         }
         genres
         siteUrl
+        characters (sort: ROLE, perPage: 5) {
+          edges {
+            node {
+              name {
+                full
+              }
+              siteUrl
+            }
+            voiceActors (language: JAPANESE) {
+              name {
+                full
+              }
+              siteUrl
+            }
+          }
+        }
       }
     }
 `
