@@ -23,7 +23,7 @@ const Staff = new Resolver('staff', async (message: Message, args: string[]) => 
   const reformattedDescription = slicedDescription.replace(/__/g, '**')
   const embedMessage = new MessageEmbed()
     .setColor('#ffaaa5')
-    .setTitle(`${result.name.first}${result.name.last ? ` ${result.name.last}` : ''} (${result.name.native})`)
+    .setTitle(`${result.name.full} (${result.name.native})`)
     .setURL(result.siteUrl)
     .setDescription(reformattedDescription)
     .setThumbnail(result.image.medium)

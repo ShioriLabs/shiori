@@ -1,9 +1,8 @@
 interface Staff {
   id: number;
   name: {
-    first: string;
-    last?: string;
     native: string;
+    full: string;
   };
   description: string;
   image: {

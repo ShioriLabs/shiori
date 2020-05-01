@@ -28,9 +28,8 @@ const STAFF_QUERY = `
     Staff(search: $q) {
       id
       name {
-        first
-        last
         native
+        full
       }
       description
       image {
