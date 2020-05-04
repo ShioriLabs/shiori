@@ -44,6 +44,27 @@ const getBalance = async (user: GuildMember): Promise<Account> => {
   }
 }
 
+const deductBalance = async (user: GuildMember, amount: number): Promise<void> => {
+  const account = await getBalance(user)
+  await client.query(
+    q.Update(
+      q.Select('ref',
+        q.Get(
+          q.Match(
+            q.Index('selectByUser'),
+            account.data.user
+          )
+        )
+      ),
+      {
+        data: {
+          balance: account.data.balance - amount
+        }
+      }
+    )
+  )
+}
+
 const sendMoney = async (user: GuildMember, receiver: GuildMember, amount: number): Promise<void> => {
   const sender: Account = await getBalance(user)
   const to: Account = await getBalance(receiver)
@@ -68,7 +89,9 @@ const sendMoney = async (user: GuildMember, receiver: GuildMember, amount: numbe
       }
     )
   )
+
+  await deductBalance(user, amount)
 }
 
 export default client
-export { openAccount, getBalance, sendMoney }
+export { openAccount, getBalance, deductBalance, sendMoney }
