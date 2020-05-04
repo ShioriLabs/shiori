@@ -1,6 +1,6 @@
 import fauna from 'faunadb'
 import dotenv from 'dotenv'
-import { GuildMember } from 'discord.js'
+import { User } from 'discord.js'
 
 import Account from '../class/Account'
 
@@ -11,7 +11,7 @@ const client = new fauna.Client({
   secret: process.env.FAUNA_TOKEN
 })
 
-const createAccount = async (user: GuildMember): Promise<Account> => {
+const createAccount = async (user: User): Promise<Account> => {
   const account: Account = await client.query(
     q.Create(
       q.Collection('balance'),
@@ -27,7 +27,7 @@ const createAccount = async (user: GuildMember): Promise<Account> => {
   return account
 }
 
-const getAccountInfo = async (user: GuildMember): Promise<Account> => {
+const getAccountInfo = async (user: User): Promise<Account> => {
   try {
     const account: Account = await client.query(
       q.Get(
@@ -44,7 +44,7 @@ const getAccountInfo = async (user: GuildMember): Promise<Account> => {
   }
 }
 
-const deductBalance = async (user: GuildMember, amount: number): Promise<Account> => {
+const deductBalance = async (user: User, amount: number): Promise<Account> => {
   const account = await getAccountInfo(user)
   return await client.query(
     q.Update(
@@ -65,7 +65,7 @@ const deductBalance = async (user: GuildMember, amount: number): Promise<Account
   )
 }
 
-const addBalance = async (user: GuildMember, amount: number): Promise<Account> => {
+const addBalance = async (user: User, amount: number): Promise<Account> => {
   const account = await getAccountInfo(user)
   return await client.query(
     q.Update(
@@ -86,7 +86,7 @@ const addBalance = async (user: GuildMember, amount: number): Promise<Account> =
   )
 }
 
-const sendMoney = async (user: GuildMember, receiver: GuildMember, amount: number): Promise<Account[]> => {
+const sendMoney = async (user: User, receiver: User, amount: number): Promise<Account[]> => {
   const sender: Account = await getAccountInfo(user)
   if (sender.data.balance < amount) {
     throw new Error('Not enough balance')

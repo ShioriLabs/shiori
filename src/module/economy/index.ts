@@ -5,7 +5,7 @@ import { getAccountInfo, sendMoney } from '../../util/faunaQueries'
 import Resolver from '../../class/Resolver'
 
 const Balance = new Resolver('balance', async (message: Message) => {
-  const account = await getAccountInfo(message.member)
+  const account = await getAccountInfo(message.author)
   const messageEmbed = new MessageEmbed()
     .setColor('#ffaaa5')
     .setTitle('Account Statement')
@@ -28,7 +28,7 @@ const Send = new Resolver('send', async (message: Message, args: string[]) => {
   }
   const amount = Number.parseInt(args.shift())
   try {
-    await sendMoney(message.member, to, amount)
+    await sendMoney(message.author, to.user, amount)
     const embed = new MessageEmbed()
       .setColor('#ffaaa5')
       .setTitle('Money Received!')
