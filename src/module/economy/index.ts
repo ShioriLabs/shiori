@@ -56,7 +56,7 @@ const Send = new Resolver('send', async (message: Message, args: string[]) => {
       ])
     }
     to.user.send(embed)
-    message.channel.send(`Successfully sent ${amount} BCN to <!@${to.user.id}>!`)
+    message.channel.send(`Successfully sent ${amount} BCN to <@!${to.user.id}>!`)
   } catch (e) {
     if (e instanceof Error && e.message === 'Not enough balance') {
       message.reply(e.message)
