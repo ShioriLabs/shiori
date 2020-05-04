@@ -11,7 +11,7 @@ const client = new fauna.Client({
   secret: process.env.FAUNA_TOKEN
 })
 
-const openAccount = async (user: GuildMember): Promise<Account> => {
+const createAccount = async (user: GuildMember): Promise<Account> => {
   const account: Account = await client.query(
     q.Create(
       q.Collection('balance'),
@@ -39,7 +39,7 @@ const getBalance = async (user: GuildMember): Promise<Account> => {
     )
     return account
   } catch {
-    const account = await openAccount(user)
+    const account = await createAccount(user)
     return account
   }
 }
@@ -94,4 +94,4 @@ const sendMoney = async (user: GuildMember, receiver: GuildMember, amount: numbe
 }
 
 export default client
-export { openAccount, getBalance, deductBalance, sendMoney }
+export { createAccount as openAccount, getBalance, deductBalance, sendMoney }
