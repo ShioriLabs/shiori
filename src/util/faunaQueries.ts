@@ -18,7 +18,7 @@ const createAccount = async (user: GuildMember): Promise<Account> => {
       {
         data: {
           user: user.id,
-          balance: 0
+          balance: 100
         }
       }
     )
