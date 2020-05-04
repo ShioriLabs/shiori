@@ -1,16 +1,16 @@
 import { Message, MessageEmbed } from 'discord.js'
 
-import { getBalance, sendMoney } from '../../util/faunaQueries'
+import { getAccountInfo, sendMoney } from '../../util/faunaQueries'
 
 import Resolver from '../../class/Resolver'
 
 const Balance = new Resolver('balance', async (message: Message) => {
-  const balance = await getBalance(message.member)
+  const account = await getAccountInfo(message.member)
   const messageEmbed = new MessageEmbed()
     .setColor('#ffaaa5')
     .setTitle('Account Statement')
     .addField('Account Holder', message.author.username)
-    .addField('Balance', `${balance.data.balance} BCN`)
+    .addField('Balance', `${account.data.balance} BCN`)
     .setTimestamp(Date.now())
   message.channel.send(messageEmbed)
 }, 'Get balance info')
