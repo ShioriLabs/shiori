@@ -27,7 +27,7 @@ const openAccount = async (user: GuildMember): Promise<Account> => {
   return account
 }
 
-const getBalance = async (user: GuildMember): Promise<number> => {
+const getBalance = async (user: GuildMember): Promise<Account> => {
   try {
     const account: Account = await client.query(
       q.Get(
@@ -37,12 +37,38 @@ const getBalance = async (user: GuildMember): Promise<number> => {
         )
       )
     )
-    return account.data.balance
+    return account
   } catch {
     const account = await openAccount(user)
-    return account.data.balance
+    return account
   }
 }
 
+const sendMoney = async (user: GuildMember, receiver: GuildMember, amount: number): Promise<void> => {
+  const sender: Account = await getBalance(user)
+  const to: Account = await getBalance(receiver)
+  if (sender.data.balance < amount) {
+    throw new Error('Not enough balance')
+  }
+
+  await client.query(
+    q.Update(
+      q.Select('ref',
+        q.Get(
+          q.Match(
+            q.Index('selectByUser'),
+            to.data.user
+          )
+        )
+      ),
+      {
+        data: {
+          balance: to.data.balance + amount
+        }
+      }
+    )
+  )
+}
+
 export default client
-export { openAccount, getBalance }
+export { openAccount, getBalance, sendMoney }
