@@ -1,0 +1,10 @@
+import fauna from 'faunadb';
+import { User } from 'discord.js';
+import Account from '../class/Account';
+declare const client: fauna.Client;
+declare const createAccount: (user: User) => Promise<Account>;
+declare const getAccountInfo: (user: User) => Promise<Account>;
+declare const deductBalance: (user: User, amount: number) => Promise<Account>;
+declare const sendMoney: (user: User, receiver: User, amount: number) => Promise<Account[]>;
+export default client;
+export { createAccount, getAccountInfo, deductBalance, sendMoney };
