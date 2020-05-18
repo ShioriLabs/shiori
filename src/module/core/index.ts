@@ -7,8 +7,8 @@ const Ping = new Resolver('ping', (message: Message) => {
   message.reply('Pong!')
 }, 'Ping the bot')
 
-const Help = new Resolver('help', (message: Message, args: string[]) => {
-  if (args.length === 0) {
+const Help = new Resolver('help', (message: Message, args?: string[]) => {
+  if (args && args.length === 0) {
     const commandList = compileHelpPage()
     const HelpEmbed = new MessageEmbed()
       .setColor('#ffaaa5')
@@ -24,7 +24,7 @@ const Help = new Resolver('help', (message: Message, args: string[]) => {
       ])
     message.channel.send(HelpEmbed)
   } else {
-    const moduleName = args.join(' ')
+    const moduleName = (args && args.join(' ')) as string
     try {
       const commandList = compileHelpFile(moduleName)
       const HelpEmbed = new MessageEmbed()
@@ -46,8 +46,8 @@ const Help = new Resolver('help', (message: Message, args: string[]) => {
   }
 }, 'Show this help message')
 
-const Echo = new Resolver('echo', (message: Message, args: string[]) => {
-  if (args.length > 0) {
+const Echo = new Resolver('echo', (message: Message, args?: string[]) => {
+  if (args && args.length > 0) {
     const text = args.join(' ')
     message.channel.send(text)
   } else {

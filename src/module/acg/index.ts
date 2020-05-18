@@ -4,12 +4,12 @@ import Resolver from '../../class/Resolver'
 
 import anilist from '../../util/anilistQueries'
 
-const Staff = new Resolver('staff', async (message: Message, args: string[]) => {
-  if (args.length === 0) {
+const Staff = new Resolver('staff', async (message: Message, args?: string[]) => {
+  if (args && args.length === 0) {
     message.channel.send('You need to insert something to search!')
     return
   }
-  const searchQuery = args.join(' ')
+  const searchQuery = (args && args.join(' ')) as string
   const sentMessage = await message.channel.send(`Searching ${searchQuery} on AniList...`)
   try {
     const result = await anilist.getStaff(searchQuery)
@@ -37,12 +37,12 @@ const Staff = new Resolver('staff', async (message: Message, args: string[]) => 
   }
 }, 'Get an anime staff\'s detail')
 
-const Anime = new Resolver('anime', async (message: Message, args: string[]) => {
-  if (args.length === 0) {
+const Anime = new Resolver('anime', async (message: Message, args?: string[]) => {
+  if (args && args.length === 0) {
     message.channel.send('You need to insert something to search!')
     return
   }
-  const searchQuery = args.join(' ')
+  const searchQuery = (args && args.join(' ')) as string
   const sentMessage = await message.channel.send(`Searching ${searchQuery} on AniList...`)
   try {
     const result = await anilist.getAnime(searchQuery)

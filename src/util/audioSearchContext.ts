@@ -20,7 +20,7 @@ function removeContext (user: GuildMember): void {
   userContext = userContext.filter(item => item.user.id !== user.id)
 }
 
-function getContext (user: GuildMember): {user: GuildMember; audioMessage: Message; context: UserAudioContext[]} {
+function getContext (user: GuildMember): {user: GuildMember; audioMessage: Message; context: UserAudioContext[]} | undefined {
   return userContext.find(item => item.user.id === user.id)
 }
 

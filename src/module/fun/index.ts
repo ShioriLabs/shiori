@@ -22,7 +22,7 @@ const Greet = new Resolver('greet', (message: Message) => {
   }
 }, 'Greet someone (or anyone)')
 
-const Confess = new Resolver('confess', (message: Message, args: string[]) => {
+const Confess = new Resolver('confess', (message: Message, args?: string[]) => {
   const user = message.mentions.users.first()
 
   const possibleString = [
@@ -33,7 +33,7 @@ const Confess = new Resolver('confess', (message: Message, args: string[]) => {
   ]
 
   const confession = possibleString[Math.floor(Math.random() * possibleString.length)]
-  let who = args.join(' ')
+  let who = args ? args.join(' ') : ''
 
   if (user) {
     who = `<@!${user.id}>`
@@ -52,7 +52,7 @@ const Dice = new Resolver('dice', (message: Message) => {
   message.channel.send(result)
 }, 'Roll a dice')
 
-const Encourage = new Resolver('encourage', (message: Message, args: string[]) => {
+const Encourage = new Resolver('encourage', (message: Message, args?: string[]) => {
   const user = message.mentions.users.first()
 
   const possibleString = [
@@ -68,7 +68,7 @@ const Encourage = new Resolver('encourage', (message: Message, args: string[]) =
 
   if (user) {
     message.channel.send(`<@!${user.id}>, ${encouragement}`)
-  } else if (args.length === 1 && args[0].toLowerCase() === 'me') {
+  } else if (args && args.length === 1 && args[0].toLowerCase() === 'me') {
     message.channel.send(`<@!${message.author.id}>, ${encouragement}`)
   } else {
     message.channel.send('Please mention someone you want to encourage!')

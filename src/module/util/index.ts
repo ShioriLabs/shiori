@@ -4,8 +4,8 @@ import axios from 'axios'
 import Resolver from '../../class/Resolver'
 import WikipediaAPIResponse from '../../class/WikipediaAPIResponse'
 
-const Define = new Resolver('define', async (message: Message, args: string[]) => {
-  if (args.length === 0) {
+const Define = new Resolver('define', async (message: Message, args?: string[]) => {
+  if (!args || args.length === 0) {
     message.channel.send('You need to insert something to search!')
   } else {
     const sentMessage = await message.channel.send('Let me search Wikipedia for that...')
@@ -28,8 +28,8 @@ const Define = new Resolver('define', async (message: Message, args: string[]) =
   }
 }, 'Get a definition of something from Wikipedia')
 
-const Urban = new Resolver('urban', async (message: Message, args: string[]) => {
-  if (args.length === 0) {
+const Urban = new Resolver('urban', async (message: Message, args?: string[]) => {
+  if (!args || args.length === 0) {
     message.channel.send('You need to insert something to search!')
   } else {
     const sentMessage = await message.channel.send('Let me search Urban Dictionary for that...')

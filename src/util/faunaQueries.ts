@@ -8,7 +8,7 @@ dotenv.config()
 
 const q = fauna.query
 const client = new fauna.Client({
-  secret: process.env.FAUNA_TOKEN
+  secret: process.env.FAUNA_TOKEN || ''
 })
 
 const createAccount = async (user: User): Promise<Account> => {

@@ -1,3 +1,5 @@
+import Module from '../class/Module'
+
 import Core from './core'
 import Fun from './fun'
 import Music from './music'
@@ -12,4 +14,4 @@ export default [
   Util,
   ACG,
   Economy
-]
+] as Module[]
