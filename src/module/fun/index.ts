@@ -93,6 +93,29 @@ const Compliment = new Resolver('compliment', (message: Message) => {
   }
 }, 'Compliment someone for their hard work!')
 
+const Pekofy = new Resolver('pekofy', async (message: Message) => {
+  const msgId = message.reference?.messageID
+  if (msgId) {
+    const msg = await message.channel.messages.fetch(msgId)
+    const splittedMessages = msg.content.split(/\./g)
+    const punctuationsRegex = /[!?]/g
+    const pekofiedMessages = splittedMessages.map(item => {
+      if (item.length >= 1) {
+        if (punctuationsRegex.test(item)) {
+          const splittedMessage = Array.from(item)
+          const punctuation = splittedMessage.pop()
+          return `${splittedMessage.join('')} peko${punctuation}`
+        }
+        return `${item} peko`
+      }
+      return item
+    })
+    message.channel.send(pekofiedMessages.join('.'))
+  } else {
+    message.channel.send('Please reply to someone when using this command!')
+  }
+}, 'Pekofy a message peko')
+
 export default {
   id: 'fun',
   name: 'Fun',
@@ -104,6 +127,7 @@ export default {
     Coin,
     Dice,
     Encourage,
-    Compliment
+    Compliment,
+    Pekofy
   ]
 }
