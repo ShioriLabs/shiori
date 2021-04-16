@@ -71,7 +71,7 @@ var Staff = new Resolver_1.default('staff', function (message, args) { return __
                 slicedDescription = descriptionSections.slice(0, 3).join('\n\n');
                 reformattedDescription = slicedDescription.replace(/__/g, '**');
                 embedMessage = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle(result.name.full + " (" + result.name.native + ")")
                     .setURL(result.siteUrl)
                     .setDescription(reformattedDescription)
@@ -120,7 +120,7 @@ var Anime = new Resolver_1.default('anime', function (message, args) { return __
                 return [2 /*return*/];
             case 5:
                 embedMessage = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle("" + (result.title.english ? result.title.english : result.title.romaji))
                     .setURL(result.siteUrl)
                     .setDescription(result.description.replace(/<br>/g, ''))

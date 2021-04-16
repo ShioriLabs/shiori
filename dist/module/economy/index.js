@@ -50,7 +50,7 @@ var Balance = new Resolver_1.default('balance', function (message) { return __aw
             case 1:
                 account = _a.sent();
                 messageEmbed = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle('Account Statement')
                     .addField('Account Holder', message.author.username)
                     .addField('Balance', account.data.balance + " BCN")
@@ -85,7 +85,7 @@ var Send = new Resolver_1.default('send', function (message, args) { return __aw
             case 2:
                 _b.sent();
                 embed = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle('Money Received!')
                     .setDescription(message.author.tag + " has send you some money!")
                     .addFields([

@@ -20,7 +20,7 @@ var Help = new Resolver_1.default('help', function (message, args) {
     if (args && args.length === 0) {
         var commandList = compileHelpFile_1.compileHelpPage();
         var HelpEmbed = new discord_js_1.MessageEmbed()
-            .setColor('#ffaaa5')
+            .setColor('#f55875')
             .setTitle('Help Page')
             .setDescription('Get help on the modules by typing `=help <module>`. Below is the available modules')
             .addFields(__spreadArrays(commandList.map(function (item) {
@@ -36,7 +36,7 @@ var Help = new Resolver_1.default('help', function (message, args) {
         try {
             var commandList = compileHelpFile_1.compileHelpFile(moduleName);
             var HelpEmbed = new discord_js_1.MessageEmbed()
-                .setColor('#ffaaa5')
+                .setColor('#f55875')
                 .setTitle("Help Page: " + commandList.name)
                 .setDescription("" + commandList.description)
                 .addFields(__spreadArrays(commandList.help.map(function (item) {
@@ -64,7 +64,7 @@ var Echo = new Resolver_1.default('echo', function (message, args) {
 exports.default = {
     id: 'core',
     name: 'Core',
-    description: 'Core Shiori Commands',
+    description: 'Core Shiori commands',
     commands: [
         Ping,
         Help,
