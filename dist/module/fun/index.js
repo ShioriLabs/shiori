@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var discord_js_1 = require("discord.js");
 var Resolver_1 = __importDefault(require("../../class/Resolver"));
 // const WuohMantab = new Resolver('mantap', (message: Message) => {
 //   const user = message.mentions.users.first()
@@ -149,6 +150,39 @@ var Pekofy = new Resolver_1.default('pekofy', function (message) { return __awai
         }
     });
 }); }, 'Pekofy a message peko');
+var RockPaperScissor = new Resolver_1.default('rps', function (message) { return __awaiter(void 0, void 0, void 0, function () {
+    var choices, player1, player2, msg;
+    var _a, _b;
+    return __generator(this, function (_c) {
+        choices = ['✌', '✊', '✋'];
+        player1 = {
+            player: "" + message.author.tag,
+            choice: choices[Math.floor(Math.random() * choices.length)]
+        };
+        player2 = {
+            player: (_b = (_a = message.mentions.users.first()) === null || _a === void 0 ? void 0 : _a.tag) !== null && _b !== void 0 ? _b : 'Shiori',
+            choice: choices[Math.floor(Math.random() * choices.length)]
+        };
+        msg = new discord_js_1.MessageEmbed({
+            title: 'Rock-Paper-Scissor',
+            color: '#f55875',
+            fields: [
+                {
+                    name: player1.player,
+                    value: player1.choice,
+                    inline: true
+                },
+                {
+                    name: player2.player,
+                    value: player2.choice,
+                    inline: true
+                }
+            ]
+        });
+        message.channel.send(msg);
+        return [2 /*return*/];
+    });
+}); }, 'Play rock-paper-scissors with someone!');
 exports.default = {
     id: 'fun',
     name: 'Fun',
@@ -161,6 +195,7 @@ exports.default = {
         Dice,
         Encourage,
         Compliment,
-        Pekofy
+        Pekofy,
+        RockPaperScissor
     ]
 };

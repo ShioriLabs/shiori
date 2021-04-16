@@ -41,9 +41,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = require("discord.js");
 var axios_1 = __importDefault(require("axios"));
+var jsqr_1 = __importDefault(require("jsqr"));
+var jimp_1 = __importDefault(require("jimp"));
 var Resolver_1 = __importDefault(require("../../class/Resolver"));
 var Define = new Resolver_1.default('define', function (message, args) { return __awaiter(void 0, void 0, void 0, function () {
-    var sentMessage, query, searchResult, data, page, resultMessage;
+    var sentMessage, query, searchResult, data, page, extract, resultMessage;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -66,11 +68,15 @@ var Define = new Resolver_1.default('define', function (message, args) { return 
             case 6:
                 data = (_a.sent()).data;
                 page = Object.values(data.query.pages)[0];
+                extract = page.extract;
+                if (extract.length > 1950) {
+                    extract = extract.substring(0, 1954) + "... (" + (extract.length - 1950) + " more characters)";
+                }
                 resultMessage = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle(page.title)
                     .setURL(page.fullurl)
-                    .setDescription(page.extract)
+                    .setDescription(extract)
                     .setFooter('Content from Wikipedia');
                 return [4 /*yield*/, sentMessage.edit('Here\'s what I found on Wikipedia:')];
             case 7:
@@ -106,7 +112,7 @@ var Urban = new Resolver_1.default('urban', function (message, args) { return __
             case 5:
                 result = data.list[0];
                 resultMessage = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle(result.word)
                     .setURL(result.permalink)
                     .setDescription(result.definition)
@@ -129,12 +135,39 @@ var Urban = new Resolver_1.default('urban', function (message, args) { return __
         }
     });
 }); }, 'Get a definition of something from Urban Dictionary');
+var ScanQR = new Resolver_1.default('scan-qr', function (message) { return __awaiter(void 0, void 0, void 0, function () {
+    var image, attachmentFile, attachmentBuffer, imageObject, result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                image = message.attachments.first();
+                if (!image) return [3 /*break*/, 3];
+                return [4 /*yield*/, axios_1.default.get(image.url, { responseType: 'arraybuffer' })];
+            case 1:
+                attachmentFile = _a.sent();
+                attachmentBuffer = Buffer.from(attachmentFile.data);
+                return [4 /*yield*/, jimp_1.default.read(attachmentBuffer)];
+            case 2:
+                imageObject = _a.sent();
+                result = jsqr_1.default(new Uint8ClampedArray(imageObject.bitmap.data), imageObject.bitmap.width, imageObject.bitmap.height);
+                if (result) {
+                    message.reply("That QR Code contains: " + result.data);
+                }
+                else {
+                    message.reply('That QR Code seems invalid, let\'s try again!');
+                }
+                _a.label = 3;
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
 exports.default = {
     id: 'util',
     name: 'Utilities',
     description: 'Useful commands for getting real world info',
     commands: [
         Define,
-        Urban
+        Urban,
+        ScanQR
     ]
 };

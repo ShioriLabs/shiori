@@ -43,7 +43,7 @@ const Play = new Resolver('play', async (message: Message, args?: string[]) => {
                 dispatcher
               })
               const nowPlayingEmbed = new MessageEmbed()
-                .setColor('#ffaaa5')
+                .setColor('#f55875')
                 .setTitle('Now Playing')
                 .setDescription(`${selectedSong.title} by ${selectedSong.channel}`)
               message.channel.send(nowPlayingEmbed)
@@ -76,7 +76,7 @@ const Search = new Resolver('search', async (message: Message, args?: string[]) 
     })
 
     const resultEmbed = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(`Search result for "${args.join(' ')}"`)
       .addFields(result.map((item, index: number) => {
         return {

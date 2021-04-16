@@ -1,5 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js'
 import axios from 'axios'
+import jsqr from 'jsqr'
+import Jimp from 'jimp'
 
 import Resolver from '../../class/Resolver'
 import WikipediaAPIResponse from '../../class/WikipediaAPIResponse'
@@ -17,11 +19,16 @@ const Define = new Resolver('define', async (message: Message, args?: string[]) 
     }
     const { data } = await axios.get(`https://en.wikipedia.org/w/api.php?&action=query&prop=extracts|info&titles=${encodeURI(searchResult.query.search[0].title)}&format=json&inprop=url&explaintext=true&exlimit=1&exintro=true`)
     const page: WikipediaAPIResponse = Object.values(data.query.pages)[0] as WikipediaAPIResponse
+    let extract = page.extract
+    if (extract.length > 1950) {
+      extract = `${extract.substring(0, 1954)}... (${extract.length - 1950} more characters)`
+    }
+
     const resultMessage = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(page.title)
       .setURL(page.fullurl)
-      .setDescription(page.extract)
+      .setDescription(extract)
       .setFooter('Content from Wikipedia')
     await sentMessage.edit('Here\'s what I found on Wikipedia:')
     await sentMessage.edit(resultMessage)
@@ -41,7 +48,7 @@ const Urban = new Resolver('urban', async (message: Message, args?: string[]) =>
     }
     const result = data.list[0]
     const resultMessage = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(result.word)
       .setURL(result.permalink)
       .setDescription(result.definition)
@@ -58,12 +65,28 @@ const Urban = new Resolver('urban', async (message: Message, args?: string[]) =>
   }
 }, 'Get a definition of something from Urban Dictionary')
 
+const ScanQR = new Resolver('scan-qr', async (message: Message) => {
+  const image = message.attachments.first()
+  if (image) {
+    const attachmentFile = await axios.get(image.url, { responseType: 'arraybuffer' })
+    const attachmentBuffer = Buffer.from(attachmentFile.data)
+    const imageObject = await Jimp.read(attachmentBuffer)
+    const result = jsqr(new Uint8ClampedArray(imageObject.bitmap.data), imageObject.bitmap.width, imageObject.bitmap.height)
+    if (result) {
+      message.reply(`That QR Code contains: ${result.data}`)
+    } else {
+      message.reply('That QR Code seems invalid, let\'s try again!')
+    }
+  }
+})
+
 export default {
   id: 'util',
   name: 'Utilities',
   description: 'Useful commands for getting real world info',
   commands: [
     Define,
-    Urban
+    Urban,
+    ScanQR
   ]
 }

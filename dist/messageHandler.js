@@ -15,7 +15,7 @@ var module_1 = __importDefault(require("./module"));
 function MessageHandler(message) {
     if (!message.author.bot) {
         try {
-            var parsedCommand_1 = parseCommand_1.default('=', message.content);
+            var parsedCommand_1 = parseCommand_1.default(process.env.NODE_ENV === 'development' ? 't=' : '=', message.content);
             var commands = module_1.default.reduce(function (prev, item) {
                 return __spreadArrays(prev, item.commands);
             }, []);

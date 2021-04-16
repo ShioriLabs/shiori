@@ -7,7 +7,7 @@ import Resolver from '../../class/Resolver'
 const Balance = new Resolver('balance', async (message: Message) => {
   const account = await getAccountInfo(message.author)
   const messageEmbed = new MessageEmbed()
-    .setColor('#ffaaa5')
+    .setColor('#f55875')
     .setTitle('Account Statement')
     .addField('Account Holder', message.author.username)
     .addField('Balance', `${account.data.balance} BCN`)
@@ -31,7 +31,7 @@ const Send = new Resolver('send', async (message: Message, args?: string[]) => {
     try {
       await sendMoney(message.author, to.user, amount)
       const embed = new MessageEmbed()
-        .setColor('#ffaaa5')
+        .setColor('#f55875')
         .setTitle('Money Received!')
         .setDescription(`${message.author.tag} has send you some money!`)
         .addFields([

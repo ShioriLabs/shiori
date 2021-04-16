@@ -9,7 +9,7 @@ import Resolver from './class/Resolver'
 function MessageHandler (message: Message): void {
   if (!message.author.bot) {
     try {
-      const parsedCommand = parseCommand('=', message.content)
+      const parsedCommand = parseCommand(process.env.NODE_ENV === 'development' ? 't=' : '=', message.content)
       const commands = Modules.reduce((prev: Resolver[], item: Module): Resolver[] => {
         return [
           ...prev,

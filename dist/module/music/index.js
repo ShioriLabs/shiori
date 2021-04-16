@@ -87,7 +87,7 @@ var Play = new Resolver_1.default('play', function (message, args) { return __aw
                     dispatcher: dispatcher
                 });
                 nowPlayingEmbed = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle('Now Playing')
                     .setDescription(selectedSong.title + " by " + selectedSong.channel);
                 message.channel.send(nowPlayingEmbed);
@@ -126,7 +126,7 @@ var Search = new Resolver_1.default('search', function (message, args) { return 
                     };
                 });
                 resultEmbed = new discord_js_1.MessageEmbed()
-                    .setColor('#ffaaa5')
+                    .setColor('#f55875')
                     .setTitle("Search result for \"" + args.join(' ') + "\"")
                     .addFields(result.map(function (item, index) {
                     return {
