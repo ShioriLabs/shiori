@@ -17,11 +17,18 @@ const Define = new Resolver('define', async (message: Message, args?: string[]) 
     }
     const { data } = await axios.get(`https://en.wikipedia.org/w/api.php?&action=query&prop=extracts|info&titles=${encodeURI(searchResult.query.search[0].title)}&format=json&inprop=url&explaintext=true&exlimit=1&exintro=true`)
     const page: WikipediaAPIResponse = Object.values(data.query.pages)[0] as WikipediaAPIResponse
+    let extract = page.extract
+    if (extract.length > 1950) {
+      extract = `${extract.substring(0, 1954)}... (${extract.length - 1950} more characters)`
+    }
+
+    console.log(extract.length)
+
     const resultMessage = new MessageEmbed()
       .setColor('#f55875')
       .setTitle(page.title)
       .setURL(page.fullurl)
-      .setDescription(page.extract)
+      .setDescription(extract)
       .setFooter('Content from Wikipedia')
     await sentMessage.edit('Here\'s what I found on Wikipedia:')
     await sentMessage.edit(resultMessage)
