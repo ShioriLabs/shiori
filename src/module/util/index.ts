@@ -22,8 +22,6 @@ const Define = new Resolver('define', async (message: Message, args?: string[]) 
       extract = `${extract.substring(0, 1954)}... (${extract.length - 1950} more characters)`
     }
 
-    console.log(extract.length)
-
     const resultMessage = new MessageEmbed()
       .setColor('#f55875')
       .setTitle(page.title)
