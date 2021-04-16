@@ -58,7 +58,7 @@ const Echo = new Resolver('echo', (message: Message, args?: string[]) => {
 export default {
   id: 'core',
   name: 'Core',
-  description: 'Core Shiori Commands',
+  description: 'Core Shiori commands',
   commands: [
     Ping,
     Help,
