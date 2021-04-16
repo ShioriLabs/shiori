@@ -11,7 +11,7 @@ const Help = new Resolver('help', (message: Message, args?: string[]) => {
   if (args && args.length === 0) {
     const commandList = compileHelpPage()
     const HelpEmbed = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle('Help Page')
       .setDescription('Get help on the modules by typing `=help <module>`. Below is the available modules')
       .addFields([
@@ -28,7 +28,7 @@ const Help = new Resolver('help', (message: Message, args?: string[]) => {
     try {
       const commandList = compileHelpFile(moduleName)
       const HelpEmbed = new MessageEmbed()
-        .setColor('#ffaaa5')
+        .setColor('#f55875')
         .setTitle(`Help Page: ${commandList.name}`)
         .setDescription(`${commandList.description}`)
         .addFields([

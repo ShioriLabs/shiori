@@ -23,7 +23,7 @@ const Staff = new Resolver('staff', async (message: Message, args?: string[]) =>
     const slicedDescription = descriptionSections.slice(0, 3).join('\n\n')
     const reformattedDescription = slicedDescription.replace(/__/g, '**')
     const embedMessage = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(`${result.name.full} (${result.name.native})`)
       .setURL(result.siteUrl)
       .setDescription(reformattedDescription)
@@ -53,7 +53,7 @@ const Anime = new Resolver('anime', async (message: Message, args?: string[]) =>
     }
 
     const embedMessage = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(`${result.title.english ? result.title.english : result.title.romaji}`)
       .setURL(result.siteUrl)
       .setDescription(result.description.replace(/<br>/g, ''))

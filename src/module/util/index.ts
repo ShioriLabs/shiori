@@ -18,7 +18,7 @@ const Define = new Resolver('define', async (message: Message, args?: string[]) 
     const { data } = await axios.get(`https://en.wikipedia.org/w/api.php?&action=query&prop=extracts|info&titles=${encodeURI(searchResult.query.search[0].title)}&format=json&inprop=url&explaintext=true&exlimit=1&exintro=true`)
     const page: WikipediaAPIResponse = Object.values(data.query.pages)[0] as WikipediaAPIResponse
     const resultMessage = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(page.title)
       .setURL(page.fullurl)
       .setDescription(page.extract)
@@ -41,7 +41,7 @@ const Urban = new Resolver('urban', async (message: Message, args?: string[]) =>
     }
     const result = data.list[0]
     const resultMessage = new MessageEmbed()
-      .setColor('#ffaaa5')
+      .setColor('#f55875')
       .setTitle(result.word)
       .setURL(result.permalink)
       .setDescription(result.definition)
