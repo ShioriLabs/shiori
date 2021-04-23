@@ -36,6 +36,26 @@ const STAFF_QUERY = `
         medium
       }
       siteUrl
+      age
+      characters (sort: FAVOURITES_DESC, perPage: 5) {
+        edges {
+          media {
+            title {
+              romaji
+              english
+              native
+            }
+            siteUrl
+          }
+          node {
+            name {
+              full
+              native
+            }
+            siteUrl
+          }
+        }
+      }
     }
   }
 `
@@ -63,12 +83,14 @@ const ANIME_QUERY = `
             node {
               name {
                 full
+                native
               }
               siteUrl
             }
             voiceActors (language: JAPANESE) {
               name {
                 full
+                native
               }
               siteUrl
             }
