@@ -41,7 +41,13 @@ function MessageHandler(message) {
             }, []);
             var commandExists = commands.some(function (item) {
                 if (parsedCommand_1.command === item.command) {
-                    item.callback(message, parsedCommand_1.args);
+                    try {
+                        item.callback(message, parsedCommand_1.args);
+                    }
+                    catch (commandErr) {
+                        Sentry.captureException(commandErr);
+                        message.channel.send('I- I don\'t know how to understand this and something gone wrong. Please try again!');
+                    }
                     return true;
                 }
                 return false;
@@ -51,8 +57,6 @@ function MessageHandler(message) {
             }
         }
         catch (e) {
-            Sentry.captureException(e);
-            message.channel.send('I- I don\'t know how to understand this and something gone wrong. Please try again!');
         }
     }
 }
