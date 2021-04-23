@@ -19,12 +19,14 @@ interface Anime {
             node: {
                 name: {
                     full: string;
+                    native: string;
                 };
                 siteUrl: string;
             };
             voiceActors: {
                 name: {
                     full: string;
+                    native: string;
                 };
                 siteUrl: string;
             }[];

@@ -83,12 +83,14 @@ const ANIME_QUERY = `
             node {
               name {
                 full
+                native
               }
               siteUrl
             }
             voiceActors (language: JAPANESE) {
               name {
                 full
+                native
               }
               siteUrl
             }

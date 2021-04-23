@@ -162,8 +162,8 @@ var Anime = new Resolver_1.default('anime', function (message, args) { return __
                     {
                         name: 'Casts',
                         value: result.characters.edges.map(function (item) {
-                            var actor = "[" + item.voiceActors[0].name.full + "](" + item.voiceActors[0].siteUrl + ")";
-                            var character = "[" + item.node.name.full + "](" + item.node.siteUrl + ")";
+                            var actor = "[" + item.voiceActors[0].name.full + " (" + item.voiceActors[0].name.native + ")](" + item.voiceActors[0].siteUrl + ")";
+                            var character = "[" + item.node.name.full + " (" + item.node.name.native + ")](" + item.node.siteUrl + ")";
                             return "**" + actor + "**\nas " + character;
                         }).join('\n\n')
                     }

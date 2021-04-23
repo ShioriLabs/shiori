@@ -94,8 +94,8 @@ const Anime = new Resolver('anime', async (message: Message, args?: string[]) =>
         {
           name: 'Casts',
           value: result.characters.edges.map(item => {
-            const actor = `[${item.voiceActors[0].name.full}](${item.voiceActors[0].siteUrl})`
-            const character = `[${item.node.name.full}](${item.node.siteUrl})`
+            const actor = `[${item.voiceActors[0].name.full} (${item.voiceActors[0].name.native})](${item.voiceActors[0].siteUrl})`
+            const character = `[${item.node.name.full} (${item.node.name.native})](${item.node.siteUrl})`
             return `**${actor}**\nas ${character}`
           }).join('\n\n')
         }
