@@ -1,4 +1,5 @@
 import { Message } from 'discord.js'
+import * as Sentry from '@sentry/node'
 
 import parseCommand from './util/parseCommand'
 
@@ -27,7 +28,8 @@ function MessageHandler (message: Message): void {
         message.channel.send('Invalid command. please type `=help` to see available commands!')
       }
     } catch (e) {
-
+      Sentry.captureException(e)
+      message.channel.send('I- I don\'t know how to understand this and something gone wrong. Please try again!')
     }
   }
 }
