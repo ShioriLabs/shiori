@@ -28,11 +28,25 @@ const Staff = new Resolver('staff', async (message: Message, args?: string[]) =>
       .setURL(result.siteUrl)
       .setDescription(reformattedDescription)
       .setThumbnail(result.image.medium)
+      .addFields([
+        {
+          name: 'Age',
+          value: result.age
+        },
+        {
+          name: 'Starring In',
+          value: result.characters.edges.map(item => {
+            const anime = `[${item.media[0].title.english ?? item.media[0].title.romaji} (${item.media[0].title.native})](${item.media[0].siteUrl})`
+            const character = `[${item.node.name.full} (${item.node.name.native})](${item.node.siteUrl})`
+            return `**${anime}**\nas ${character}`
+          }).join('\n\n')
+        }
+      ])
       .setFooter('Content from AniList', 'https://anilist.co/img/icons/favicon-32x32.png')
 
     await sentMessage.edit('Here\'s what I found on AniList:')
     await sentMessage.edit(embedMessage)
-  } catch {
+  } catch (e) {
     await sentMessage.edit(`Can't find ${searchQuery} on AniList!`)
   }
 }, 'Get an anime staff\'s detail')

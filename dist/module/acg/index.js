@@ -43,9 +43,9 @@ var discord_js_1 = require("discord.js");
 var Resolver_1 = __importDefault(require("../../class/Resolver"));
 var anilistQueries_1 = __importDefault(require("../../util/anilistQueries"));
 var Staff = new Resolver_1.default('staff', function (message, args) { return __awaiter(void 0, void 0, void 0, function () {
-    var searchQuery, sentMessage, result, descriptionSections, slicedDescription, reformattedDescription, embedMessage, _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var searchQuery, sentMessage, result, descriptionSections, slicedDescription, reformattedDescription, embedMessage, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
                 if (args && args.length === 0) {
                     message.channel.send('You need to insert something to search!');
@@ -54,17 +54,17 @@ var Staff = new Resolver_1.default('staff', function (message, args) { return __
                 searchQuery = (args && args.join(' '));
                 return [4 /*yield*/, message.channel.send("Searching " + searchQuery + " on AniList...")];
             case 1:
-                sentMessage = _b.sent();
-                _b.label = 2;
+                sentMessage = _a.sent();
+                _a.label = 2;
             case 2:
-                _b.trys.push([2, 8, , 10]);
+                _a.trys.push([2, 8, , 10]);
                 return [4 /*yield*/, anilistQueries_1.default.getStaff(searchQuery)];
             case 3:
-                result = _b.sent();
+                result = _a.sent();
                 if (!!result) return [3 /*break*/, 5];
                 return [4 /*yield*/, sentMessage.edit("Can't find " + searchQuery + " on AniList!")];
             case 4:
-                _b.sent();
+                _a.sent();
                 return [2 /*return*/];
             case 5:
                 descriptionSections = result.description ? result.description.split('\n\n') : ['No description available.'];
@@ -76,19 +76,34 @@ var Staff = new Resolver_1.default('staff', function (message, args) { return __
                     .setURL(result.siteUrl)
                     .setDescription(reformattedDescription)
                     .setThumbnail(result.image.medium)
+                    .addFields([
+                    {
+                        name: 'Age',
+                        value: result.age
+                    },
+                    {
+                        name: 'Starring In',
+                        value: result.characters.edges.map(function (item) {
+                            var _a;
+                            var anime = "[" + ((_a = item.media[0].title.english) !== null && _a !== void 0 ? _a : item.media[0].title.romaji) + " (" + item.media[0].title.native + ")](" + item.media[0].siteUrl + ")";
+                            var character = "[" + item.node.name.full + " (" + item.node.name.native + ")](" + item.node.siteUrl + ")";
+                            return "**" + anime + "**\nas " + character;
+                        }).join('\n\n')
+                    }
+                ])
                     .setFooter('Content from AniList', 'https://anilist.co/img/icons/favicon-32x32.png');
                 return [4 /*yield*/, sentMessage.edit('Here\'s what I found on AniList:')];
             case 6:
-                _b.sent();
+                _a.sent();
                 return [4 /*yield*/, sentMessage.edit(embedMessage)];
             case 7:
-                _b.sent();
+                _a.sent();
                 return [3 /*break*/, 10];
             case 8:
-                _a = _b.sent();
+                e_1 = _a.sent();
                 return [4 /*yield*/, sentMessage.edit("Can't find " + searchQuery + " on AniList!")];
             case 9:
-                _b.sent();
+                _a.sent();
                 return [3 /*break*/, 10];
             case 10: return [2 /*return*/];
         }

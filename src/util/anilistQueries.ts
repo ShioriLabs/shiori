@@ -36,6 +36,26 @@ const STAFF_QUERY = `
         medium
       }
       siteUrl
+      age
+      characters (sort: FAVOURITES_DESC, perPage: 5) {
+        edges {
+          media {
+            title {
+              romaji
+              english
+              native
+            }
+            siteUrl
+          }
+          node {
+            name {
+              full
+              native
+            }
+            siteUrl
+          }
+        }
+      }
     }
   }
 `
