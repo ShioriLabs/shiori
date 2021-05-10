@@ -23,5 +23,5 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/shiorilabs/shiori:latest
             ghcr.io/shiorilabs/shiori:${{ github.sha }}
+            ghcr.io/shiorilabs/shiori:latest
