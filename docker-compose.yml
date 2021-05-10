@@ -3,6 +3,4 @@ services:
   shiori:
     container_name: shiori
     image: ghcr.io/shiorilabs/shiori:latest
-    build:
-      context: .
     env_file: ./.env
