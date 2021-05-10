@@ -1,23 +1,21 @@
-FROM node:16-alpine
+FROM node:16.1.0-alpine3.13
 
-RUN mkdir -p /usr/bin/shiori
-WORKDIR /usr/bin/shiori
+WORKDIR /usr/app
 
-ENV PATH /usr/app/shiori/node_modules/.bin:$PATH
+ENV PATH /usr/app/node_modules/.bin:$PATH
 ENV PYTHONUNBUFFERED=1
 
 # Install Build Tools
-RUN apk add --update --no-cache build-base
-
-# Install Python Build Tools
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip setuptools
+RUN apk add --update --no-cache build-base && \
+    apk add --update --no-cache python3 && \
+    ln -sf python3 /usr/bin/python && \ 
+    python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools
 
 # Install Project Dependencies
-COPY package.json package-lock.json /usr/bin/shiori/
+COPY package.json package-lock.json /usr/app/
 RUN npm ci
 
-COPY . /usr/bin/shiori
+COPY . /usr/app
 
 CMD ["npm", "start"]
