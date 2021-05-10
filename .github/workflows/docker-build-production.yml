@@ -15,7 +15,7 @@ jobs:
         with:
           registry: docker.pkg.github.com
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GH_ACTIONS_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build Docker Image
         id: docker_build
@@ -23,5 +23,5 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/ShioriLabs/shiori:latest
-            ghcr.io/ShioriLabs/shiori:${{ GITHUB_SHA }}
+            ghcr.io/shiorilabs/shiori:latest
+            ghcr.io/shiorilabs/shiori:${{ github.sha }}
