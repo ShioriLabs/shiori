@@ -14,8 +14,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: docker.pkg.github.com
-          username: stevemc4
-          password: ${{ secrets.GH_ACTIONS_TOKEN }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build Docker Image
         id: docker_build
