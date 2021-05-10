@@ -1,0 +1,27 @@
+name: docker-build
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to GitHub Packages
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_ACTIONS_TOKEN }}
+      -
+        name: Build Docker Image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ghcr.io/ShioriLabs/shiori:latest
+            ghcr.io/ShioriLabs/shiori:${{ GITHUB_SHA }}
