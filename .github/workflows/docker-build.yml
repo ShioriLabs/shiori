@@ -69,7 +69,7 @@ jobs:
       - run: npm run unit
 
   build-image:
-    needs: [test:lint, test:unit]
+    needs: ['test:lint', 'test:unit']
     runs-on: ubuntu-latest
     steps:
       -
