@@ -28,7 +28,7 @@ jobs:
           path: |
             ~/node_modules
 
-  test:lint:
+  test-lint:
     needs: install-dependencies
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +48,7 @@ jobs:
           node-version: '16.1.0'
       - run: npm run lint
   
-  test:unit:
+  test-unit:
     needs: install-dependencies
     runs-on: ubuntu-latest
     steps:
@@ -69,7 +69,7 @@ jobs:
       - run: npm run unit
 
   build-image:
-    needs: ['test:lint', 'test:unit']
+    needs: [test-lint, test-unit]
     runs-on: ubuntu-latest
     steps:
       -
