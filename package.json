@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint \"src/**/*.ts\" --fix",
+    "unit": "npm run build && nyc ava",
     "build": "tsc",
     "dev": "NODE_ENV=development nodemon -e ts --watch ./src --exec \"babel-node src/app.ts --extensions=\".ts\"\"",
     "start": "node dist/app.js",
@@ -37,6 +38,7 @@
     "ytdl-core": "^2.1.7"
   },
   "devDependencies": {
+    "@ava/typescript": "^1.1.1",
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
     "@babel/plugin-transform-runtime": "^7.9.0",
@@ -46,6 +48,7 @@
     "@types/yt-search": "^1.1.0",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
+    "ava": "^3.15.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.1",
@@ -53,6 +56,14 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "typescript": "^3.9.2"
+  },
+  "ava": {
+    "typescript": {
+      "rewritePaths": {
+        "src/": "dist/"
+      }
+    }
   }
 }
