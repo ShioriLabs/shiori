@@ -8,9 +8,7 @@ var ParsedCommand = /** @class */ (function () {
      * @param body Un-parsed command arguments
      */
     function ParsedCommand(command, args, body) {
-        if (command !== undefined) {
-            this.command = command;
-        }
+        this.command = command;
         if (args !== undefined) {
             this.args = args;
         }

@@ -17,6 +17,6 @@ declare class ParsedCommand {
      * @param arg Arguments passed with the command
      * @param body Un-parsed command arguments
      */
-    constructor(command?: string, args?: string[], body?: string);
+    constructor(command: string, args?: string[], body?: string);
 }
 export default ParsedCommand;

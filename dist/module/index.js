@@ -5,14 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __importDefault(require("./core"));
 var fun_1 = __importDefault(require("./fun"));
-var music_1 = __importDefault(require("./music"));
+// import Music from './music'
 var util_1 = __importDefault(require("./util"));
 var acg_1 = __importDefault(require("./acg"));
 var economy_1 = __importDefault(require("./economy"));
 exports.default = [
+    // Music,
     core_1.default,
     fun_1.default,
-    music_1.default,
     util_1.default,
     acg_1.default,
     economy_1.default
