@@ -8,10 +8,10 @@ function parseCommand(prefix, message) {
     if (message.startsWith(prefix) || message.toLowerCase().startsWith('hey shiori, ')) {
         var split = message.replace(prefix, '').replace('hey shiori, ', '').split(/ /g);
         var command = split.shift();
-        return new ParsedCommand_1.default(command, split, split.join(' '));
+        if (command) {
+            return new ParsedCommand_1.default(command, split, split.join(' '));
+        }
     }
-    else {
-        throw new Error('Invalid command');
-    }
+    throw new Error('Invalid command');
 }
 exports.default = parseCommand;
