@@ -116,6 +116,29 @@ const Pekofy = new Resolver('pekofy', async (message: Message) => {
   }
 }, 'Pekofy a message peko')
 
+const Mock = new Resolver('mock', async (message: Message, args?: string[] | undefined) => {
+  const msgId = message.reference?.messageID
+  if (msgId) {
+    const msg = await message.channel.messages.fetch(msgId)
+    const splittedText = msg.content.split('')
+    const mockedText = splittedText.map(char => {
+      if (Math.random() > 0.5) return char.toUpperCase()
+      return char.toLowerCase()
+    })
+    message.channel.send(mockedText.join(''))
+  } else if (args && args.length > 0) {
+    const msg = args.join(' ')
+    const splittedText = msg.split('')
+    const mockedText = splittedText.map(char => {
+      if (Math.random() > 0.5) return char.toUpperCase()
+      return char.toLowerCase()
+    })
+    message.channel.send(mockedText.join(''))
+  } else {
+    message.channel.send('Please reply to someone or pass an argument when using this command!')
+  }
+}, 'MoCKifY a message')
+
 const RockPaperScissor = new Resolver('rps', async (message: Message) => {
   const choices = ['✌', '✊', '✋']
   const player1 = {
@@ -159,6 +182,7 @@ export default {
     Encourage,
     Compliment,
     Pekofy,
+    Mock,
     RockPaperScissor
   ]
 }
