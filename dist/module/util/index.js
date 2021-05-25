@@ -160,7 +160,7 @@ var ScanQR = new Resolver_1.default('scan-qr', function (message) { return __awa
             case 3: return [2 /*return*/];
         }
     });
-}); });
+}); }, 'Scan a QR code');
 exports.default = {
     id: 'util',
     name: 'Utilities',

@@ -78,7 +78,7 @@ const ScanQR = new Resolver('scan-qr', async (message: Message) => {
       message.reply('That QR Code seems invalid, let\'s try again!')
     }
   }
-})
+}, 'Scan a QR code')
 
 export default {
   id: 'util',

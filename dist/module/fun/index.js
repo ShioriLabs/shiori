@@ -150,6 +150,44 @@ var Pekofy = new Resolver_1.default('pekofy', function (message) { return __awai
         }
     });
 }); }, 'Pekofy a message peko');
+var Mock = new Resolver_1.default('mock', function (message, args) { return __awaiter(void 0, void 0, void 0, function () {
+    var msgId, msg, splittedText, mockedText, msg, splittedText, mockedText;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                msgId = (_a = message.reference) === null || _a === void 0 ? void 0 : _a.messageID;
+                if (!msgId) return [3 /*break*/, 2];
+                return [4 /*yield*/, message.channel.messages.fetch(msgId)];
+            case 1:
+                msg = _b.sent();
+                splittedText = msg.content.split('');
+                mockedText = splittedText.map(function (char) {
+                    if (Math.random() > 0.5)
+                        return char.toUpperCase();
+                    return char.toLowerCase();
+                });
+                message.channel.send(mockedText.join(''));
+                return [3 /*break*/, 3];
+            case 2:
+                if (args && args.length > 0) {
+                    msg = args.join(' ');
+                    splittedText = msg.split('');
+                    mockedText = splittedText.map(function (char) {
+                        if (Math.random() > 0.5)
+                            return char.toUpperCase();
+                        return char.toLowerCase();
+                    });
+                    message.channel.send(mockedText.join(''));
+                }
+                else {
+                    message.channel.send('Please reply to someone or pass an argument when using this command!');
+                }
+                _b.label = 3;
+            case 3: return [2 /*return*/];
+        }
+    });
+}); }, 'MoCKifY a message');
 var RockPaperScissor = new Resolver_1.default('rps', function (message) { return __awaiter(void 0, void 0, void 0, function () {
     var choices, player1, player2, msg;
     var _a, _b;
@@ -196,6 +234,7 @@ exports.default = {
         Encourage,
         Compliment,
         Pekofy,
+        Mock,
         RockPaperScissor
     ]
 };
