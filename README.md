@@ -8,7 +8,7 @@ If you want to try `shiori`, you need to run it by yourself since it's still not
 
 ### Prerequisites
 1. Get a Discord bot token. You can get one in [Discord Developers Page](https://discord.com/developers/applications)
-2. Get a Fauna database. You can do it in [their site](https://fauna.com/) and get the database token.
+2. Get a Fauna database. You can do it on [their site](https://fauna.com/) and get the database token.
 
 ### Install with Docker
 Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed
@@ -34,7 +34,7 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 
 4. Start it with Docker Compose
     ```sh
-    docker-compose up
+    docker-compose up -d
     ```
 
 ### Install with Node
