@@ -1,6 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js'
 
 import Resolver from '../../class/Resolver'
+import SimpleCommand from '../../class/SimpleCommand'
 
 // const WuohMantab = new Resolver('mantap', (message: Message) => {
 //   const user = message.mentions.users.first()
@@ -12,18 +13,18 @@ import Resolver from '../../class/Resolver'
 //   }
 // })
 
-const Greet = new Resolver('greet', (message: Message) => {
-  const user = message.mentions.users.first()
+const Greet = new SimpleCommand('greet', (message?: Message): string => {
+  const user = message?.mentions.users.first()
 
   if (user) {
-    message.channel.send(`Hi <@!${user.id}>!`)
-  } else {
-    message.channel.send('Hello All!')
+    return `Hi <@!${user.id}>!`
   }
+
+  return 'Hello All!'
 }, 'Greet someone (or anyone)')
 
-const Confess = new Resolver('confess', (message: Message, args?: string[]) => {
-  const user = message.mentions.users.first()
+const Confess = new SimpleCommand('confess', (message?: Message, args?: string[]): string => {
+  const user = message?.mentions.users.first()
 
   const possibleString = [
     'do you want to be my lover?',
@@ -39,21 +40,21 @@ const Confess = new Resolver('confess', (message: Message, args?: string[]) => {
     who = `<@!${user.id}>`
   }
 
-  message.channel.send(`Hi ${who}, ${confession}`)
+  return `Hi ${who}, ${confession}`
 }, 'Confess to someone!')
 
-const Coin = new Resolver('coin', (message: Message) => {
+const Coin = new SimpleCommand('coin', (): string => {
   const random = Math.random()
-  message.channel.send(random > 0.5 ? 'Head' : 'Tails')
+  return random > 0.5 ? 'Head' : 'Tails'
 }, 'Flip a coin')
 
-const Dice = new Resolver('dice', (message: Message) => {
+const Dice = new SimpleCommand('dice', (): string => {
   const result = Math.ceil(Math.random() * 6)
-  message.channel.send(result)
+  return `The dice is rolled to ${result}!`
 }, 'Roll a dice')
 
-const Encourage = new Resolver('encourage', (message: Message, args?: string[]) => {
-  const user = message.mentions.users.first()
+const Encourage = new SimpleCommand('encourage', (message?: Message, args?: string[]) => {
+  const user = message?.mentions.users.first()
 
   const possibleString = [
     'you can do it!',
@@ -67,16 +68,16 @@ const Encourage = new Resolver('encourage', (message: Message, args?: string[]) 
   const encouragement = possibleString[Math.floor(Math.random() * possibleString.length)]
 
   if (user) {
-    message.channel.send(`<@!${user.id}>, ${encouragement}`)
+    return `<@!${user.id}>, ${encouragement}`
   } else if (args && args.length === 1 && args[0].toLowerCase() === 'me') {
-    message.channel.send(`<@!${message.author.id}>, ${encouragement}`)
-  } else {
-    message.channel.send('Please mention someone you want to encourage!')
+    return `<@!${message?.author.id}>, ${encouragement}`
   }
+
+  return 'Please mention someone you want to encourage!'
 }, 'Encourage someone to do their best!')
 
-const Compliment = new Resolver('compliment', (message: Message) => {
-  const user = message.mentions.users.first()
+const Compliment = new SimpleCommand('compliment', (message?: Message) => {
+  const user = message?.mentions.users.first()
 
   const possibleString = [
     'good job!',
@@ -87,10 +88,9 @@ const Compliment = new Resolver('compliment', (message: Message) => {
   const compliment = possibleString[Math.floor(Math.random() * possibleString.length)]
 
   if (user) {
-    message.channel.send(`<@!${user.id}>, ${compliment}`)
-  } else {
-    message.channel.send('Please mention someone you want to encourage!')
+    return `<@!${user.id}>, ${compliment}`
   }
+  return 'Please mention someone you want to encourage!'
 }, 'Compliment someone for their hard work!')
 
 const Pekofy = new Resolver('pekofy', async (message: Message) => {
@@ -116,7 +116,7 @@ const Pekofy = new Resolver('pekofy', async (message: Message) => {
   }
 }, 'Pekofy a message peko')
 
-const Mock = new Resolver('mock', async (message: Message, args?: string[] | undefined) => {
+const Mock = new Resolver('mock', async (message: Message, args?: string[]) => {
   const msgId = message.reference?.messageID
   if (msgId) {
     const msg = await message.channel.messages.fetch(msgId)

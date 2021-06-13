@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = require("discord.js");
 var Resolver_1 = __importDefault(require("../../class/Resolver"));
+var SimpleCommand_1 = __importDefault(require("../../class/SimpleCommand"));
 // const WuohMantab = new Resolver('mantap', (message: Message) => {
 //   const user = message.mentions.users.first()
 //   if (user) {
@@ -49,17 +50,15 @@ var Resolver_1 = __importDefault(require("../../class/Resolver"));
 //     message.channel.send('Wuooohh mantab! Jadi teringat deg2annya di momen senbatsu Uza pekan lalu')
 //   }
 // })
-var Greet = new Resolver_1.default('greet', function (message) {
-    var user = message.mentions.users.first();
+var Greet = new SimpleCommand_1.default('greet', function (message) {
+    var user = message === null || message === void 0 ? void 0 : message.mentions.users.first();
     if (user) {
-        message.channel.send("Hi <@!" + user.id + ">!");
+        return "Hi <@!" + user.id + ">!";
     }
-    else {
-        message.channel.send('Hello All!');
-    }
+    return 'Hello All!';
 }, 'Greet someone (or anyone)');
-var Confess = new Resolver_1.default('confess', function (message, args) {
-    var user = message.mentions.users.first();
+var Confess = new SimpleCommand_1.default('confess', function (message, args) {
+    var user = message === null || message === void 0 ? void 0 : message.mentions.users.first();
     var possibleString = [
         'do you want to be my lover?',
         'would you go out with me?',
@@ -71,18 +70,18 @@ var Confess = new Resolver_1.default('confess', function (message, args) {
     if (user) {
         who = "<@!" + user.id + ">";
     }
-    message.channel.send("Hi " + who + ", " + confession);
+    return "Hi " + who + ", " + confession;
 }, 'Confess to someone!');
-var Coin = new Resolver_1.default('coin', function (message) {
+var Coin = new SimpleCommand_1.default('coin', function () {
     var random = Math.random();
-    message.channel.send(random > 0.5 ? 'Head' : 'Tails');
+    return random > 0.5 ? 'Head' : 'Tails';
 }, 'Flip a coin');
-var Dice = new Resolver_1.default('dice', function (message) {
+var Dice = new SimpleCommand_1.default('dice', function () {
     var result = Math.ceil(Math.random() * 6);
-    message.channel.send(result);
+    return "The dice is rolled to " + result + "!";
 }, 'Roll a dice');
-var Encourage = new Resolver_1.default('encourage', function (message, args) {
-    var user = message.mentions.users.first();
+var Encourage = new SimpleCommand_1.default('encourage', function (message, args) {
+    var user = message === null || message === void 0 ? void 0 : message.mentions.users.first();
     var possibleString = [
         'you can do it!',
         'don\'t let your dreams be dreams. So just do it!',
@@ -93,17 +92,15 @@ var Encourage = new Resolver_1.default('encourage', function (message, args) {
     ];
     var encouragement = possibleString[Math.floor(Math.random() * possibleString.length)];
     if (user) {
-        message.channel.send("<@!" + user.id + ">, " + encouragement);
+        return "<@!" + user.id + ">, " + encouragement;
     }
     else if (args && args.length === 1 && args[0].toLowerCase() === 'me') {
-        message.channel.send("<@!" + message.author.id + ">, " + encouragement);
+        return "<@!" + (message === null || message === void 0 ? void 0 : message.author.id) + ">, " + encouragement;
     }
-    else {
-        message.channel.send('Please mention someone you want to encourage!');
-    }
+    return 'Please mention someone you want to encourage!';
 }, 'Encourage someone to do their best!');
-var Compliment = new Resolver_1.default('compliment', function (message) {
-    var user = message.mentions.users.first();
+var Compliment = new SimpleCommand_1.default('compliment', function (message) {
+    var user = message === null || message === void 0 ? void 0 : message.mentions.users.first();
     var possibleString = [
         'good job!',
         'keep it up!',
@@ -111,11 +108,9 @@ var Compliment = new Resolver_1.default('compliment', function (message) {
     ];
     var compliment = possibleString[Math.floor(Math.random() * possibleString.length)];
     if (user) {
-        message.channel.send("<@!" + user.id + ">, " + compliment);
+        return "<@!" + user.id + ">, " + compliment;
     }
-    else {
-        message.channel.send('Please mention someone you want to encourage!');
-    }
+    return 'Please mention someone you want to encourage!';
 }, 'Compliment someone for their hard work!');
 var Pekofy = new Resolver_1.default('pekofy', function (message) { return __awaiter(void 0, void 0, void 0, function () {
     var msgId, msg, splittedMessages, punctuationsRegex_1, pekofiedMessages;
