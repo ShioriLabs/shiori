@@ -11,5 +11,6 @@ jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo 'Hello to ${{ github.event.input.target }}'
+    - name: 'Hello World'
+      run: |
+        echo 'Hello to ${{ github.event.inputs.target }}'
