@@ -1,0 +1,15 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Server target to deploy'
+        required: true
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo 'Hello to ${{ github.event.input.target }}'
