@@ -22,6 +22,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var os_1 = __importDefault(require("os"));
+var axios_1 = __importDefault(require("axios"));
 var dotenv_1 = __importDefault(require("dotenv"));
 var discord_js_1 = __importDefault(require("discord.js"));
 var Sentry = __importStar(require("@sentry/node"));
@@ -41,6 +43,11 @@ try {
                     type: 'LISTENING'
                 }
             });
+            if (process.env.DISCORD_WEBHOOK_URL) {
+                axios_1.default.post(process.env.DISCORD_WEBHOOK_URL, {
+                    content: "A Shiori instance just started on `" + os_1.default.hostname() + "`"
+                });
+            }
             console.log("Logged in as " + client_1.user.tag);
         }
     });
