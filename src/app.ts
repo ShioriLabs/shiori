@@ -1,3 +1,6 @@
+import os from 'os'
+
+import axios from 'axios'
 import dotenv from 'dotenv'
 import Discord from 'discord.js'
 import * as Sentry from '@sentry/node'
@@ -22,6 +25,11 @@ try {
           type: 'LISTENING'
         }
       })
+      if (process.env.DISCORD_WEBHOOK_URL) {
+        axios.post(process.env.DISCORD_WEBHOOK_URL, {
+          content: `A Shiori instance just started on \`${os.hostname()}\``
+        })
+      }
       console.log(`Logged in as ${client.user.tag}`)
     }
   })
