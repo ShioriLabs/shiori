@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 'Deploy'
-      uses: fifsky/ssh-action@master
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
-        user: ${{ secrets.USERNAME }}
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY}}
-        command: |
+        script: |
           cd @shiorilabs/services/shiori
           docker-compose down
           docker-compose pull
