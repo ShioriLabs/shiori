@@ -1,16 +1,19 @@
 name: deploy
 
-on:
-  workflow_dispatch:
-    inputs:
-      target:
-        description: 'Server target to deploy'
-        required: true
+on: workflow_dispatch
 
 jobs:
-  hello-world:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 'Hello World'
-      run: |
-        echo 'Hello to ${{ github.event.inputs.target }}'
+    - name: 'Deploy'
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY}}
+        script: |
+          cd @shiorilabs/services/shiori
+          docker-compose down
+          docker-compose pull
+          docker-compose up -d
