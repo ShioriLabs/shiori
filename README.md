@@ -10,6 +10,12 @@ If you want to try `shiori`, you need to run it by yourself since it's still not
 1. Get a Discord bot token. You can get one in [Discord Developers Page](https://discord.com/developers/applications)
 2. Get a Fauna database. You can do it in [their site](https://fauna.com/) and get the database token.
 
+### Deploy on Railway
+Skip all the nonsense below. Railway is the fastest, easiest way to run `shiori`. Just click the button below to get started.
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FShioriLabs%2Fshiori&envs=DISCORD_TOKEN%2CFAUNA_TOKEN&DISCORD_TOKENDesc=The+bot%27s+token&FAUNA_TOKENDesc=FaunaDB+token)
+
+
 ### Install with Docker
 Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed
 
