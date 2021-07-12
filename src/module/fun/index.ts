@@ -1,17 +1,7 @@
-import { Message, MessageEmbed } from 'discord.js'
+import { Message } from 'discord.js'
 
 import Resolver from '../../class/Resolver'
 import SimpleCommand from '../../class/SimpleCommand'
-
-// const WuohMantab = new Resolver('mantap', (message: Message) => {
-//   const user = message.mentions.users.first()
-
-//   if (user) {
-//     message.channel.send(`Wuooohh mantab! Jadi teringat deg2annya di momen melihat <@!${user.id}> pekan lalu`)
-//   } else {
-//     message.channel.send('Wuooohh mantab! Jadi teringat deg2annya di momen senbatsu Uza pekan lalu')
-//   }
-// })
 
 const Greet = new SimpleCommand('greet', (message?: Message): string => {
   const user = message?.mentions.users.first()
@@ -139,36 +129,6 @@ const Mock = new Resolver('mock', async (message: Message, args?: string[]) => {
   }
 }, 'MoCKifY a message')
 
-const RockPaperScissor = new Resolver('rps', async (message: Message) => {
-  const choices = ['✌', '✊', '✋']
-  const player1 = {
-    player: `${message.author.tag}`,
-    choice: choices[Math.floor(Math.random() * choices.length)]
-  }
-  const player2 = {
-    player: message.mentions.users.first()?.tag ?? 'Shiori',
-    choice: choices[Math.floor(Math.random() * choices.length)]
-  }
-  const msg = new MessageEmbed({
-    title: 'Rock-Paper-Scissor',
-    color: '#f55875',
-    fields: [
-      {
-        name: player1.player,
-        value: player1.choice,
-        inline: true
-      },
-      {
-        name: player2.player,
-        value: player2.choice,
-        inline: true
-      }
-    ]
-  })
-
-  message.channel.send(msg)
-}, 'Play rock-paper-scissors with someone!')
-
 export default {
   id: 'fun',
   name: 'Fun',
@@ -182,7 +142,6 @@ export default {
     Encourage,
     Compliment,
     Pekofy,
-    Mock,
-    RockPaperScissor
+    Mock
   ]
 }
