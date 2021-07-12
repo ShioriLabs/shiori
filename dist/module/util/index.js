@@ -44,6 +44,7 @@ var axios_1 = __importDefault(require("axios"));
 var jsqr_1 = __importDefault(require("jsqr"));
 var jimp_1 = __importDefault(require("jimp"));
 var Resolver_1 = __importDefault(require("../../class/Resolver"));
+var ContextBasedCommand_1 = __importDefault(require("../../class/ContextBasedCommand"));
 var Define = new Resolver_1.default('define', function (message, args) { return __awaiter(void 0, void 0, void 0, function () {
     var sentMessage, query, searchResult, data, page, extract, resultMessage;
     return __generator(this, function (_a) {
@@ -135,7 +136,7 @@ var Urban = new Resolver_1.default('urban', function (message, args) { return __
         }
     });
 }); }, 'Get a definition of something from Urban Dictionary');
-var ScanQR = new Resolver_1.default('scan-qr', function (message) { return __awaiter(void 0, void 0, void 0, function () {
+var ScanQR = new ContextBasedCommand_1.default('scan-qr', function (message) { return __awaiter(void 0, void 0, void 0, function () {
     var image, attachmentFile, attachmentBuffer, imageObject, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -151,13 +152,14 @@ var ScanQR = new Resolver_1.default('scan-qr', function (message) { return __awa
                 imageObject = _a.sent();
                 result = jsqr_1.default(new Uint8ClampedArray(imageObject.bitmap.data), imageObject.bitmap.width, imageObject.bitmap.height);
                 if (result) {
-                    message.reply("That QR Code contains: " + result.data);
+                    message.react('✅');
+                    message.react('🆗');
+                    return [2 /*return*/, "That QR Code contains: " + result.data];
                 }
-                else {
-                    message.reply('That QR Code seems invalid, let\'s try again!');
-                }
-                _a.label = 3;
-            case 3: return [2 /*return*/];
+                message.react('❌');
+                message.react('🆖');
+                return [2 /*return*/, 'That QR Code seems invalid, let\'s try again!'];
+            case 3: return [2 /*return*/, 'No image detected, let\'s try again!'];
         }
     });
 }); }, 'Scan a QR code');

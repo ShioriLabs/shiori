@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -52,26 +39,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Resolver_1 = __importDefault(require("./Resolver"));
-var SimpleCommand = /** @class */ (function (_super) {
-    __extends(SimpleCommand, _super);
-    function SimpleCommand(command, callback, usage) {
-        var _this = this;
-        var _callback = function (_message, _args) { return __awaiter(_this, void 0, void 0, function () {
-            var returnValue;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, callback(_message, _args)];
-                    case 1:
-                        returnValue = _a.sent();
-                        _message.channel.send(returnValue);
-                        return [2 /*return*/];
+var discord_js_1 = require("discord.js");
+var Resolver_1 = __importDefault(require("../../class/Resolver"));
+var RockPaperScissor = new Resolver_1.default('rps', function (message) { return __awaiter(void 0, void 0, void 0, function () {
+    var choices, player1, player2, msg;
+    var _a, _b;
+    return __generator(this, function (_c) {
+        choices = ['✌', '✊', '✋'];
+        player1 = {
+            player: "" + message.author.tag,
+            choice: choices[Math.floor(Math.random() * choices.length)]
+        };
+        player2 = {
+            player: (_b = (_a = message.mentions.users.first()) === null || _a === void 0 ? void 0 : _a.tag) !== null && _b !== void 0 ? _b : 'Shiori',
+            choice: choices[Math.floor(Math.random() * choices.length)]
+        };
+        msg = new discord_js_1.MessageEmbed({
+            title: 'Rock-Paper-Scissor',
+            color: '#f55875',
+            fields: [
+                {
+                    name: player1.player,
+                    value: player1.choice,
+                    inline: true
+                },
+                {
+                    name: player2.player,
+                    value: player2.choice,
+                    inline: true
                 }
-            });
-        }); };
-        _this = _super.call(this, command, _callback, usage) || this;
-        return _this;
-    }
-    return SimpleCommand;
-}(Resolver_1.default));
-exports.default = SimpleCommand;
+            ]
+        });
+        message.channel.send(msg);
+        return [2 /*return*/];
+    });
+}); }, 'Play rock-paper-scissors with someone!');
+exports.default = {
+    id: 'games',
+    name: 'Games',
+    description: 'Play simple games with others!',
+    commands: [
+        RockPaperScissor
+    ]
+};

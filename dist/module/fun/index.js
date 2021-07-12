@@ -39,17 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var discord_js_1 = require("discord.js");
 var Resolver_1 = __importDefault(require("../../class/Resolver"));
 var SimpleCommand_1 = __importDefault(require("../../class/SimpleCommand"));
-// const WuohMantab = new Resolver('mantap', (message: Message) => {
-//   const user = message.mentions.users.first()
-//   if (user) {
-//     message.channel.send(`Wuooohh mantab! Jadi teringat deg2annya di momen melihat <@!${user.id}> pekan lalu`)
-//   } else {
-//     message.channel.send('Wuooohh mantab! Jadi teringat deg2annya di momen senbatsu Uza pekan lalu')
-//   }
-// })
 var Greet = new SimpleCommand_1.default('greet', function (message) {
     var user = message === null || message === void 0 ? void 0 : message.mentions.users.first();
     if (user) {
@@ -183,39 +174,6 @@ var Mock = new Resolver_1.default('mock', function (message, args) { return __aw
         }
     });
 }); }, 'MoCKifY a message');
-var RockPaperScissor = new Resolver_1.default('rps', function (message) { return __awaiter(void 0, void 0, void 0, function () {
-    var choices, player1, player2, msg;
-    var _a, _b;
-    return __generator(this, function (_c) {
-        choices = ['✌', '✊', '✋'];
-        player1 = {
-            player: "" + message.author.tag,
-            choice: choices[Math.floor(Math.random() * choices.length)]
-        };
-        player2 = {
-            player: (_b = (_a = message.mentions.users.first()) === null || _a === void 0 ? void 0 : _a.tag) !== null && _b !== void 0 ? _b : 'Shiori',
-            choice: choices[Math.floor(Math.random() * choices.length)]
-        };
-        msg = new discord_js_1.MessageEmbed({
-            title: 'Rock-Paper-Scissor',
-            color: '#f55875',
-            fields: [
-                {
-                    name: player1.player,
-                    value: player1.choice,
-                    inline: true
-                },
-                {
-                    name: player2.player,
-                    value: player2.choice,
-                    inline: true
-                }
-            ]
-        });
-        message.channel.send(msg);
-        return [2 /*return*/];
-    });
-}); }, 'Play rock-paper-scissors with someone!');
 exports.default = {
     id: 'fun',
     name: 'Fun',
@@ -229,7 +187,6 @@ exports.default = {
         Encourage,
         Compliment,
         Pekofy,
-        Mock,
-        RockPaperScissor
+        Mock
     ]
 };

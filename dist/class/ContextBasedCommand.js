@@ -52,26 +52,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Resolver_1 = __importDefault(require("./Resolver"));
-var SimpleCommand = /** @class */ (function (_super) {
-    __extends(SimpleCommand, _super);
-    function SimpleCommand(command, callback, usage) {
+var SimpleCommand_1 = __importDefault(require("./SimpleCommand"));
+var ContextBasedCommand = /** @class */ (function (_super) {
+    __extends(ContextBasedCommand, _super);
+    function ContextBasedCommand(command, callback, usage) {
         var _this = this;
-        var _callback = function (_message, _args) { return __awaiter(_this, void 0, void 0, function () {
-            var returnValue;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, callback(_message, _args)];
+        var _callback = function (_message, args) { return __awaiter(_this, void 0, void 0, function () {
+            var msg;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!(_message && ((_a = _message.reference) === null || _a === void 0 ? void 0 : _a.messageID))) return [3 /*break*/, 2];
+                        return [4 /*yield*/, _message.channel.messages.fetch(_message.reference.messageID)];
                     case 1:
-                        returnValue = _a.sent();
-                        _message.channel.send(returnValue);
-                        return [2 /*return*/];
+                        msg = _b.sent();
+                        return [2 /*return*/, callback(msg, args)];
+                    case 2: return [2 /*return*/, callback(_message, args)];
                 }
             });
         }); };
         _this = _super.call(this, command, _callback, usage) || this;
         return _this;
     }
-    return SimpleCommand;
-}(Resolver_1.default));
-exports.default = SimpleCommand;
+    return ContextBasedCommand;
+}(SimpleCommand_1.default));
+exports.default = ContextBasedCommand;
