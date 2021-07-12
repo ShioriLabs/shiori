@@ -4,6 +4,7 @@ import jsqr from 'jsqr'
 import Jimp from 'jimp'
 
 import Resolver from '../../class/Resolver'
+import ContextBasedCommand from '../../class/ContextBasedCommand'
 import WikipediaAPIResponse from '../../class/WikipediaAPIResponse'
 
 const Define = new Resolver('define', async (message: Message, args?: string[]) => {
@@ -65,7 +66,7 @@ const Urban = new Resolver('urban', async (message: Message, args?: string[]) =>
   }
 }, 'Get a definition of something from Urban Dictionary')
 
-const ScanQR = new Resolver('scan-qr', async (message: Message) => {
+const ScanQR = new ContextBasedCommand('scan-qr', async (message: Message) => {
   const image = message.attachments.first()
   if (image) {
     const attachmentFile = await axios.get(image.url, { responseType: 'arraybuffer' })
@@ -73,11 +74,16 @@ const ScanQR = new Resolver('scan-qr', async (message: Message) => {
     const imageObject = await Jimp.read(attachmentBuffer)
     const result = jsqr(new Uint8ClampedArray(imageObject.bitmap.data), imageObject.bitmap.width, imageObject.bitmap.height)
     if (result) {
-      message.reply(`That QR Code contains: ${result.data}`)
-    } else {
-      message.reply('That QR Code seems invalid, let\'s try again!')
+      message.react('✅')
+      message.react('🆗')
+      return `That QR Code contains: ${result.data}`
     }
+
+    message.react('❌')
+    message.react('🆖')
+    return 'That QR Code seems invalid, let\'s try again!'
   }
+  return 'No image detected, let\'s try again!'
 }, 'Scan a QR code')
 
 export default {

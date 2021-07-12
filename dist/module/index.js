@@ -8,10 +8,12 @@ var fun_1 = __importDefault(require("./fun"));
 var util_1 = __importDefault(require("./util"));
 var acg_1 = __importDefault(require("./acg"));
 var economy_1 = __importDefault(require("./economy"));
+var games_1 = __importDefault(require("./games"));
 exports.default = [
     core_1.default,
     fun_1.default,
     util_1.default,
     acg_1.default,
-    economy_1.default
+    economy_1.default,
+    games_1.default
 ];
