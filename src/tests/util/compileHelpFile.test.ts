@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import Modules from '../../module'
+import Modules from '../../modules'
 import { compileHelpFile, compileHelpPage } from '../../util/compileHelpFile'
 
 test('generates help page correctly', t => {
