@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/node'
 
 import parseCommand from './util/parseCommand'
 
-import Modules from './module'
+import Modules from './modules'
 import Module from './types/Module'
 import Resolver from './class/Resolver'
 

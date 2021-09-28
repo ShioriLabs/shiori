@@ -1,4 +1,4 @@
-import Modules from '../module'
+import Modules from '../modules'
 import Resolver from '../class/Resolver'
 
 function compileHelpFile (module: string): {name: string; description: string; help: {command: string; usage: string}[]} {
