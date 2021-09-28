@@ -1,6 +1,6 @@
 import fauna from 'faunadb';
 import { User } from 'discord.js';
-import Account from '../class/Account';
+import Account from '../types/Account';
 declare const client: fauna.Client;
 declare const createAccount: (user: User) => Promise<Account>;
 declare const getAccountInfo: (user: User) => Promise<Account>;

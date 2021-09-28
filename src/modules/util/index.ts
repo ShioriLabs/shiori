@@ -5,7 +5,7 @@ import Jimp from 'jimp'
 
 import Resolver from '../../class/Resolver'
 import ContextBasedCommand from '../../class/ContextBasedCommand'
-import WikipediaAPIResponse from '../../class/WikipediaAPIResponse'
+import WikipediaAPIResponse from '../../types/WikipediaAPIResponse'
 
 const Define = new Resolver('define', async (message: Message, args?: string[]) => {
   if (!args || args.length === 0) {

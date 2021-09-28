@@ -1,4 +1,4 @@
-import Resolver from './Resolver'
+import Resolver from '../class/Resolver'
 
 interface Module {
   id: string;

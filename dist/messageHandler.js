@@ -31,12 +31,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Sentry = __importStar(require("@sentry/node"));
 var parseCommand_1 = __importDefault(require("./util/parseCommand"));
-var module_1 = __importDefault(require("./module"));
+var modules_1 = __importDefault(require("./modules"));
 function MessageHandler(message) {
     if (!message.author.bot) {
         try {
             var parsedCommand_1 = parseCommand_1.default(process.env.NODE_ENV === 'development' ? 't=' : '=', message.content);
-            var commands = module_1.default.reduce(function (prev, item) {
+            var commands = modules_1.default.reduce(function (prev, item) {
                 return __spreadArrays(prev, item.commands);
             }, []);
             var commandExists = commands.some(function (item) {

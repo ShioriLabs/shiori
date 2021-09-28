@@ -2,7 +2,7 @@ import fauna from 'faunadb'
 import dotenv from 'dotenv'
 import { User } from 'discord.js'
 
-import Account from '../class/Account'
+import Account from '../types/Account'
 
 dotenv.config()
 

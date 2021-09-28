@@ -3,8 +3,8 @@ import * as Sentry from '@sentry/node'
 
 import parseCommand from './util/parseCommand'
 
-import Modules from './module'
-import Module from './class/Module'
+import Modules from './modules'
+import Module from './types/Module'
 import Resolver from './class/Resolver'
 
 function MessageHandler (message: Message): void {

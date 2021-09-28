@@ -1,4 +1,4 @@
-import Module from '../class/Module'
+import Module from '../types/Module'
 
 import Core from './core'
 import Fun from './fun'
