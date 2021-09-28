@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 
-import Staff from '../class/Staff'
-import Anime from '../class/Anime'
+import Staff from '../types/Staff'
+import Anime from '../types/Anime'
 
 const aniListClient = axios.create({
   baseURL: 'https://graphql.anilist.co',
