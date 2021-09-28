@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.compileHelpFile = exports.compileHelpPage = void 0;
-var module_1 = __importDefault(require("../module"));
+var modules_1 = __importDefault(require("../modules"));
 function compileHelpFile(module) {
-    var mod = module_1.default.filter(function (item) { return item.id === module; });
+    var mod = modules_1.default.filter(function (item) { return item.id === module; });
     if (mod.length === 0) {
         throw new Error();
     }
@@ -23,7 +23,7 @@ function compileHelpFile(module) {
 }
 exports.compileHelpFile = compileHelpFile;
 function compileHelpPage() {
-    return module_1.default.map(function (item) {
+    return modules_1.default.map(function (item) {
         return {
             module: item.name,
             description: item.description,
